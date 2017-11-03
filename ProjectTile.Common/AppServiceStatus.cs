@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace ProjectTile.Common
 {
-    public class Class1
+    public static class AppServiceStatus
     {
+        public const string Ready = "READY";
+
+        public const string Stopping = "STOPPING";
     }
 }
