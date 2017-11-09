@@ -30,6 +30,10 @@ namespace ProjectTile.UWP
             this.InitializeComponent();
         }
 
+        private void OnNavigationViewBtnClick(object sender, RoutedEventArgs e)
+        {
+            this.NavigationView.IsPaneOpen = !this.NavigationView.IsPaneOpen;
+        }
 
         //private async void OnRequestReceived(Windows.ApplicationModel.AppService.AppServiceConnection sender, Windows.ApplicationModel.AppService.AppServiceRequestReceivedEventArgs args)
         //{

@@ -65,6 +65,10 @@
     <Analyzer Include="..\packages\UwpDesktop.10.0.14393.3\analyzers\dotnet\UwpDesktopAnalyzer.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>xcopy /y /s "$(SolutionDir)ProjectTile.Service\bin\$(ConfigurationName)\$(TargetName)$(TargetExt)" "$(SolutionDir)ProjectTile.UWP\bin\x64\$(ConfigurationName)\AppX\"
+xcopy /y /s "$(SolutionDir)ProjectTile.Service\bin\$(ConfigurationName)\$(TargetName)$(TargetExt)" "$(SolutionDir)ProjectTile.UWP\bin\x86\$(ConfigurationName)\AppX\"</PostBuildEvent>
+  </PropertyGroup>
   <Import Project="..\packages\UwpDesktop.10.0.14393.3\build\portable-net45+uap\UwpDesktop.targets" Condition="Exists('..\packages\UwpDesktop.10.0.14393.3\build\portable-net45+uap\UwpDesktop.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
@@ -72,8 +76,4 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\UwpDesktop.10.0.14393.3\build\portable-net45+uap\UwpDesktop.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\UwpDesktop.10.0.14393.3\build\portable-net45+uap\UwpDesktop.targets'))" />
   </Target>
-  <PropertyGroup>
-    <PostBuildEvent>xcopy /y /s "$(SolutionDir)ProjectTile.Service\bin\$(ConfigurationName)\$(TargetName)$(TargetExt)" "$(SolutionDir)ProjectTile.UWP\bin\x64\$(ConfigurationName)\AppX\"
-xcopy /y /s "$(SolutionDir)ProjectTile.Service\bin\$(ConfigurationName)\$(TargetName)$(TargetExt)" "$(SolutionDir)ProjectTile.UWP\bin\x86\$(ConfigurationName)\AppX\"</PostBuildEvent>
-  </PropertyGroup>
 </Project>

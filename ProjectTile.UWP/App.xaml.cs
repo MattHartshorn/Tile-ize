@@ -16,6 +16,9 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.ApplicationModel.AppService;
 using Windows.ApplicationModel.Background;
+using Windows.ApplicationModel.Core;
+using Windows.UI.ViewManagement;
+using Windows.UI;
 
 namespace ProjectTile.UWP
 {
@@ -32,8 +35,6 @@ namespace ProjectTile.UWP
         public App()
         {
             this.InitializeComponent();
-            this.Suspending += OnSuspending;
-            this.Resuming += OnResuming;
         }
         #endregion
 
@@ -79,6 +80,7 @@ namespace ProjectTile.UWP
             }
 
             LaunchAppService();
+            ExtendView();
         }
 
         protected override void OnBackgroundActivated(BackgroundActivatedEventArgs e)
@@ -103,6 +105,14 @@ namespace ProjectTile.UWP
                 await FullTrustProcessLauncher.LaunchFullTrustProcessForCurrentAppAsync();
             }
         }
+
+        private void ExtendView()
+        {
+            CoreApplication.GetCurrentView().TitleBar.ExtendViewIntoTitleBar = true;
+            ApplicationViewTitleBar titleBar = ApplicationView.GetForCurrentView().TitleBar;
+            titleBar.ButtonBackgroundColor = Colors.Transparent;
+            titleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
+        }
         #endregion
 
         #region EventHandler Methods
@@ -116,38 +126,10 @@ namespace ProjectTile.UWP
             throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
         }
 
-        /// <summary>
-        /// Invoked when application execution is being suspended.  Application state is saved
-        /// without knowing whether the application will be terminated or resumed with the contents
-        /// of memory still intact.
-        /// </summary>
-        /// <param name="sender">The source of the suspend request.</param>
-        /// <param name="e">Details about the suspend request.</param>
-        private void OnSuspending(object sender, SuspendingEventArgs e)
-        {
-            var deferral = e.SuspendingOperation.GetDeferral();
-
-            // Free the connection upon termination or suspension
-            if (App.AppServiceConnection != null)
-            {
-                App.AppServiceConnection.Dispose();
-                App.AppServiceConnection = null;
-                App.IsAppServiceReady = false;
-            }
-
-            //TODO: Save application state and stop any background activity
-            deferral.Complete();
-        }
-
         private void OnAppServiceReady(object sender)
         {
             App.IsAppServiceReady = true;
             App.AppServiceReady?.Invoke(sender, EventArgs.Empty);
-        }
-
-        private void OnResuming(object sender, object e)
-        {
-            LaunchAppService();
         }
         #endregion
 

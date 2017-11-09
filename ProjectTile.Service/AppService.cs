@@ -8,7 +8,7 @@ using ProjectTile.Common;
 
 namespace ProjectTile.Service
 {
-    internal class AppService
+    internal class Win32AppService
     {
         #region Private Fields
         private AppServiceConnection _connection;
@@ -16,13 +16,13 @@ namespace ProjectTile.Service
         #endregion
 
         #region Constructor
-        public AppService()
+        public Win32AppService()
         {
             this._terminate = new ManualResetEvent(false);
 
             this._connection = new AppServiceConnection()
             {
-                AppServiceName = "CommunicationService",
+                AppServiceName = "Win32AppService",
                 PackageFamilyName = Windows.ApplicationModel.Package.Current.Id.FamilyName,
             };
             this._connection.RequestReceived += OnRequestReceived;

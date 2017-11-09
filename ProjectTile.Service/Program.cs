@@ -13,7 +13,7 @@ namespace ProjectTile.Service
         {
             try
             {
-                new AppService().Start();
+                new Win32AppService().Start();
             }
             catch (InvalidOperationException)
             {

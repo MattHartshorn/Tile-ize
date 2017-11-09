@@ -38,8 +38,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppServiceStatus.cs" />
+    <Compile Include="ApplicationInfo.cs" />
+    <Compile Include="AppStyle.cs" />
+    <Compile Include="AppTheme.cs" />
     <Compile Include="CommandNames.cs" />
+    <Compile Include="IAppManifestService.cs" />
+    <Compile Include="IdentityGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VisualElementsManifest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
 </Project>

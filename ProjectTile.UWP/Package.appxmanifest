@@ -22,14 +22,13 @@
       </uap:VisualElements>
       <Extensions>
         <uap:Extension Category="windows.appService">
-          <uap:AppService Name="CommunicationService" />
+          <uap:AppService Name="Win32AppService" />
         </uap:Extension>
         <desktop:Extension Category="windows.fullTrustProcess" Executable="ProjectTile.Service.exe" />
       </Extensions>
     </Application>
   </Applications>
   <Capabilities>
-    <Capability Name="internetClient" />
     <rescap:Capability Name="runFullTrust" />
   </Capabilities>
 </Package>
