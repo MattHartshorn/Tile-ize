@@ -1,0 +1,90 @@
+﻿<Page
+    x:Class="ProjectTile.UWP.Views.Pages.MainPageView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ProjectTile.UWP.Views.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <NavigationView x:Name="NavView"
+                    OpenPaneLength="250"  
+                    CompactModeThresholdWidth="560" 
+                    ExpandedModeThresholdWidth="560" 
+                    Loaded="OnNavViewLoaded"
+                    SelectionChanged="OnNavViewSelectionChanged">
+
+        <NavigationView.MenuItems>
+            <NavigationViewItem x:Name="HomeNavItem" Content="Home" Tag="home">
+                <NavigationViewItem.Icon>
+                    <FontIcon Glyph="&#xE10F;"/>
+                </NavigationViewItem.Icon>
+            </NavigationViewItem>
+            <NavigationViewItem Content="Theme" Tag="theme">
+                <NavigationViewItem.Icon>
+                    <FontIcon Glyph="&#xE771;"/>
+                </NavigationViewItem.Icon>
+            </NavigationViewItem>
+            <NavigationViewItem Content="App Styling" Tag="styles">
+                <NavigationViewItem.Icon>
+                    <FontIcon Glyph="&#xED63;"/>
+                </NavigationViewItem.Icon>
+            </NavigationViewItem>
+        </NavigationView.MenuItems>
+
+        <NavigationView.HeaderTemplate>
+            <DataTemplate>
+                <Grid Background="{ThemeResource SystemControlBackgroundChromeMediumLowBrush}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Margin="24,24,0,0"
+                               Style="{StaticResource TitleTextBlockStyle}"
+                               FontSize="28"
+                               VerticalAlignment="Center"
+                               Text="{Binding}"/>
+
+                    <CommandBar Grid.Column="1"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Bottom"
+                                DefaultLabelPosition="Right" 
+                                Background="{ThemeResource SystemControlBackgroundChromeMediumLowBrush}">
+                        <AppBarToggleButton x:Name="ToggleAllAppBtn" 
+                                      Label="Show Apps" 
+                                      Checked="OnToggleAppsPanelCheckedChanged"
+                                      Unchecked="OnToggleAppsPanelCheckedChanged"
+                                      Style="{ThemeResource AppBarToggleButtonRevealLabelsOnRightStyle}">
+                            <AppBarToggleButton.Icon>
+                                <FontIcon Glyph="&#xE71D;"/>
+                            </AppBarToggleButton.Icon>
+                        </AppBarToggleButton>
+                    </CommandBar>
+                </Grid>
+            </DataTemplate>
+        </NavigationView.HeaderTemplate        
+>
+
+        <SplitView x:Name="MainContentSplitView" 
+                   DisplayMode="Inline" 
+                   PanePlacement="Right" 
+                   PaneBackground="{ThemeResource SystemControlAcrylicWindowBrush}">
+            <SplitView.Pane>
+                <Grid>
+
+                </Grid>
+            </SplitView.Pane>
+            
+            <Frame x:Name="ContentFrame"
+                   Padding="24,0,0,0" 
+                   Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}">
+                <Frame.ContentTransitions>
+                    <TransitionCollection>
+                        <NavigationThemeTransition/>
+                    </TransitionCollection>
+                </Frame.ContentTransitions>
+            </Frame>
+        </SplitView>
+    </NavigationView>
+</Page>

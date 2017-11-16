@@ -1,6 +1,8 @@
 ﻿{
   "supports": {},
-  "dependencies": {},
+  "dependencies": {
+    "MvvmLight": "5.3.0"
+  },
   "frameworks": {
     ".NETPortable,Version=v4.6,Profile=Profile44": {}
   }
