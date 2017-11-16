@@ -73,13 +73,13 @@ namespace ProjectTile.UWP
                     // When the navigation stack isn't restored navigate to the first page,
                     // configuring the new page by passing required information as a navigation
                     // parameter
-                    rootFrame.Navigate(typeof(MainPage), e.Arguments);
+                    rootFrame.Navigate(typeof(Pages.MainPage), e.Arguments);
                 }
                 // Ensure the current window is active
                 Window.Current.Activate();
             }
 
-            LaunchAppService();
+            //LaunchAppService();
             ExtendView();
         }
 
@@ -98,13 +98,13 @@ namespace ProjectTile.UWP
         #endregion
 
         #region Private Methods
-        private async void LaunchAppService()
-        {
-            if (!IsAppServiceReady)
-            {
-                await FullTrustProcessLauncher.LaunchFullTrustProcessForCurrentAppAsync();
-            }
-        }
+        //private async void LaunchAppService()
+        //{
+        //    if (!IsAppServiceReady)
+        //    {
+        //        await FullTrustProcessLauncher.LaunchFullTrustProcessForCurrentAppAsync();
+        //    }
+        //}
 
         private void ExtendView()
         {
