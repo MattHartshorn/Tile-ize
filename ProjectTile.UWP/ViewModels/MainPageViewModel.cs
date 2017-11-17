@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Practices.ServiceLocation;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Views;
 using ProjectTile.UWP.Services;
 using ProjectTile.UWP.Views.Pages;
 
@@ -12,6 +14,7 @@ namespace ProjectTile.UWP.ViewModels
 {
     class MainPageViewModel : ViewModelBase
     {
+        #region Fields
         private readonly INavigationService _navigationService;
 
         private string _header;
@@ -19,17 +22,17 @@ namespace ProjectTile.UWP.ViewModels
         private bool _isAllAppsPanelOpen;
         private bool _isAllAppsPanelEnabled;
         private bool _allAppsPanelOpenStateCache;
+#       endregion
 
-
-        public MainPageViewModel(INavigationService navigationService)
+        #region Constructor
+        public MainPageViewModel()
         {
-            if (navigationService == null)
-                throw new ArgumentNullException();
-
-            this._navigationService = navigationService;
+            this._navigationService = ServiceLocator.Current.GetInstance<INavigationService>();
             this.NavigateCommand = new RelayCommand<string>(OnNavigateCommandAction);
         }
+        #endregion
 
+        #region Properties
 
         public string Header
         {
@@ -76,7 +79,9 @@ namespace ProjectTile.UWP.ViewModels
             get;
         }
 
+        #endregion
 
+        #region Private Methods
         private void OnNavigateCommandAction(string pageTag)
         {
             if (pageTag == "settings")
@@ -85,6 +90,7 @@ namespace ProjectTile.UWP.ViewModels
                 this._allAppsPanelOpenStateCache = this.IsAllAppsPanelOpen;
                 this.IsAllAppsPanelEnabled = false;
                 this.IsAllAppsPanelOpen = false;
+                this._navigationService.NavigateTo(ViewModelLocator.NavigationPageNames.Settings);
                 return;
             }
 
@@ -95,17 +101,18 @@ namespace ProjectTile.UWP.ViewModels
             {
                 case "home":
                     this.Header = "Home";
-                    this._navigationService.Navigate(typeof(HomePageView));
+                    this._navigationService.NavigateTo(ViewModelLocator.NavigationPageNames.Home);
                     break;
                 case "theme":
                     this.Header = "Theme";
-                    this._navigationService.Navigate(typeof(ThemePageView));
+                    this._navigationService.NavigateTo(ViewModelLocator.NavigationPageNames.Theme);
                     break;
                 case "styles":
                     this.Header = "App Styling";
-                    this._navigationService.Navigate(typeof(StylesPageView));
+                    this._navigationService.NavigateTo(ViewModelLocator.NavigationPageNames.Styles);
                     break;
             }
         }
+        #endregion
     }
 }

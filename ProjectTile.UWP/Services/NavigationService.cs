@@ -5,31 +5,52 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using ProjectTile.UWP.Views.Pages;
+using GalaSoft.MvvmLight.Views;
+
 
 namespace ProjectTile.UWP.Services
 {
-    public sealed class NavigationService : INavigationService
+    class NavigationService : INavigationService
     {
-        public void Navigate(Type sourcePage)
+        #region Fields
+        private readonly Dictionary<string, Type> _pageIndex;
+        private string _currentPageKey;
+        #endregion
+
+        #region Constructor
+        public NavigationService()
         {
-            var frame = (Frame)Window.Current.Content;
-            frame.Navigate(sourcePage);
+            this._pageIndex = new Dictionary<string, Type>();
+        }
+        #endregion
+
+        #region Properties
+        public string CurrentPageKey
+        {
+            get { return this._currentPageKey; }
+            private set { this._currentPageKey = value; }
+        }
+        #endregion
+
+        #region Public Methods
+        public void Configure(string key, Type pageType)
+        {
+            this._pageIndex.Add(key, pageType);
         }
 
-        public void Navigate(Type sourcePage, object parameter)
+        public void NavigateTo(string pageKey)
         {
-            var frame = (Frame)Window.Current.Content;
-            frame.Navigate(sourcePage, parameter);
+            var frame = Window.Current.Content as Frame;
+            frame.Navigate(this._pageIndex[pageKey]);
+            this.CurrentPageKey = pageKey;
         }
 
-        public void Navigate(string sourcePage)
+        public void NavigateTo(string pageKey, object parameter)
         {
-            Navigate(Type.GetType(sourcePage));
-        }
-
-        public void Navigate(string sourcePage, object parameter)
-        {
-            Navigate(Type.GetType(sourcePage), parameter);
+            var frame = Window.Current.Content as Frame;
+            frame.Navigate(this._pageIndex[pageKey], parameter);
+            this.CurrentPageKey = pageKey;
         }
 
         /// <summary>
@@ -49,14 +70,22 @@ namespace ProjectTile.UWP.Services
             // Frame.CanGoBack()?
             Go(false);
         }
+        #endregion
 
+        #region Private Static Members
         private static void Go(bool isForward)
         {
-            var frame = (Frame)Window.Current.Content;
+            var frame = Window.Current.Content as Frame;
+
             if (isForward)
+            {
                 frame.GoForward();
+            }
             else
+            {
                 frame.GoBack();
+            }
         }
+        #endregion
     }
 }
