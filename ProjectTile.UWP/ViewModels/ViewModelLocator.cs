@@ -6,21 +6,13 @@ using System.Threading.Tasks;
 using Microsoft.Practices.ServiceLocation;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
-using GalaSoft.MvvmLight.Views;
+using ProjectTile.UWP.Services;
 using ProjectTile.UWP.Views.Pages;
 
 namespace ProjectTile.UWP.ViewModels
 {
     class ViewModelLocator
     {
-        public static class NavigationPageNames
-        {
-            public const string Main = "MAIN";
-            public const string Home = "HOME";
-            public const string Settings = "SETTINGS";
-            public const string Theme = "THEME";
-            public const string Styles = "STYLES";
-        }
 
         public ViewModelLocator()
         {
@@ -28,11 +20,11 @@ namespace ProjectTile.UWP.ViewModels
 
             // Setup the navigation
             var nav = new NavigationService();
-            nav.Configure(NavigationPageNames.Main, typeof(MainPageView));
-            nav.Configure(NavigationPageNames.Settings, typeof(SettingsPageView));
-            nav.Configure(NavigationPageNames.Home, typeof(HomePageView));
-            nav.Configure(NavigationPageNames.Styles, typeof(StylesPageView));
-            nav.Configure(NavigationPageNames.Theme, typeof(ThemePageView));
+            nav.Configure(NavigationPageKeys.Main, typeof(MainPageView));
+            nav.Configure(NavigationPageKeys.Settings, typeof(SettingsPageView));
+            nav.Configure(NavigationPageKeys.Home, typeof(HomePageView));
+            nav.Configure(NavigationPageKeys.Styles, typeof(StylesPageView));
+            nav.Configure(NavigationPageKeys.Theme, typeof(ThemePageView));
 
 
             if (ViewModelBase.IsInDesignModeStatic)

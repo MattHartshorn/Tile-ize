@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using ProjectTile.UWP.Views.Pages;
-using GalaSoft.MvvmLight.Views;
 
 
 namespace ProjectTile.UWP.Services
@@ -16,6 +15,7 @@ namespace ProjectTile.UWP.Services
         #region Fields
         private readonly Dictionary<string, Type> _pageIndex;
         private string _currentPageKey;
+        private Frame _navigationFrame;
         #endregion
 
         #region Constructor
@@ -31,6 +31,12 @@ namespace ProjectTile.UWP.Services
             get { return this._currentPageKey; }
             private set { this._currentPageKey = value; }
         }
+
+        public Frame NavigationFrame
+        {
+            get { return this._navigationFrame ?? Window.Current.Content as Frame; }
+            set { this._navigationFrame = value ?? throw new ArgumentNullException(); }
+        }
         #endregion
 
         #region Public Methods
@@ -41,15 +47,13 @@ namespace ProjectTile.UWP.Services
 
         public void NavigateTo(string pageKey)
         {
-            var frame = Window.Current.Content as Frame;
-            frame.Navigate(this._pageIndex[pageKey]);
+            this.NavigationFrame.Navigate(this._pageIndex[pageKey]);
             this.CurrentPageKey = pageKey;
         }
 
         public void NavigateTo(string pageKey, object parameter)
         {
-            var frame = Window.Current.Content as Frame;
-            frame.Navigate(this._pageIndex[pageKey], parameter);
+            this.NavigationFrame.Navigate(this._pageIndex[pageKey], parameter);
             this.CurrentPageKey = pageKey;
         }
 
@@ -72,18 +76,16 @@ namespace ProjectTile.UWP.Services
         }
         #endregion
 
-        #region Private Static Members
-        private static void Go(bool isForward)
+        #region Private Members
+        private void Go(bool isForward)
         {
-            var frame = Window.Current.Content as Frame;
-
             if (isForward)
             {
-                frame.GoForward();
+                this.NavigationFrame.GoForward();
             }
             else
             {
-                frame.GoBack();
+                this.NavigationFrame.GoBack();
             }
         }
         #endregion

@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Practices.ServiceLocation;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using GalaSoft.MvvmLight.Views;
 using ProjectTile.UWP.Services;
 using ProjectTile.UWP.Views.Pages;
 
@@ -17,18 +17,32 @@ namespace ProjectTile.UWP.ViewModels
         #region Fields
         private readonly INavigationService _navigationService;
 
+        private ObservableCollection<NavigationMenuItemViewModel> _navMenuItems;
+        private object _selectedNavItem;
         private string _header;
         private string _toggleAllAppsBtnText;
         private bool _isAllAppsPanelOpen;
         private bool _isAllAppsPanelEnabled;
         private bool _allAppsPanelOpenStateCache;
+        private bool _isSaveRequired;
 #       endregion
 
         #region Constructor
         public MainPageViewModel()
         {
+            this.IsSaveRequired = false;
+            this.IsAllAppsPanelEnabled = true;
+
+            this._navMenuItems = new ObservableCollection<NavigationMenuItemViewModel>
+            {
+                new NavigationMenuItemViewModel("Home", "\uE10F", NavigationPageKeys.Home),
+                new NavigationMenuItemViewModel("Theme", "\uE771", NavigationPageKeys.Theme),
+                new NavigationMenuItemViewModel("App Styling", "\uED63", NavigationPageKeys.Styles)
+            };
+
             this._navigationService = ServiceLocator.Current.GetInstance<INavigationService>();
-            this.NavigateCommand = new RelayCommand<string>(OnNavigateCommandAction);
+            this.AllAppsToggleCommand = new RelayCommand(OnAllAppsToggleCommandAction, () => this.IsAllAppsPanelEnabled);
+            this.SaveCommand = new RelayCommand(OnSaveCommandAction, () => this.IsSaveRequired);
         }
         #endregion
 
@@ -41,6 +55,27 @@ namespace ProjectTile.UWP.ViewModels
             {
                 this._header = value;
                 RaisePropertyChanged(nameof(Header));
+            }
+        }
+
+        public ObservableCollection<NavigationMenuItemViewModel> NavigationMenuItems
+        {
+            get { return this._navMenuItems; }
+            set
+            {
+                this._navMenuItems = value;
+                RaisePropertyChanged(nameof(NavigationMenuItems));
+            }
+        }
+
+        public object SelectedNavigationItem
+        {
+            get { return this._selectedNavItem; }
+            set
+            {
+                this._selectedNavItem = value;
+                RaisePropertyChanged(nameof(SelectedNavigationItem));
+                OnSelectedNavigationItemChanged();
             }
         }
 
@@ -74,44 +109,71 @@ namespace ProjectTile.UWP.ViewModels
             }
         }
 
-        public RelayCommand<string> NavigateCommand
+        public bool IsSaveRequired
+        {
+            get { return this._isSaveRequired; }
+            set
+            {
+                this._isSaveRequired = value;
+                RaisePropertyChanged(nameof(IsSaveRequired));
+            }
+        }
+
+        public RelayCommand AllAppsToggleCommand
         {
             get;
         }
 
+        public RelayCommand SaveCommand
+        {
+            get;
+        }
         #endregion
 
         #region Private Methods
-        private void OnNavigateCommandAction(string pageTag)
+        private void OnSelectedNavigationItemChanged()
         {
-            if (pageTag == "settings")
+            var selectedItem =  this.SelectedNavigationItem as NavigationMenuItemViewModel;
+            if (selectedItem != null)
             {
+                this.IsAllAppsPanelEnabled = true;
+                this.IsAllAppsPanelOpen = this._allAppsPanelOpenStateCache;
+
+                switch (selectedItem.Tag)
+                {
+                    case NavigationPageKeys.Home:
+                        this.Header = "Home";
+                        break;
+                    case NavigationPageKeys.Theme:
+                        this.Header = "Theme";
+                        break;
+                    case NavigationPageKeys.Styles:
+                        this.Header = "App Styling";
+                        break;
+                }
+
+                this._navigationService.NavigateTo(selectedItem.Tag as string);
+            }
+            else
+            {
+                // Settings navigation item clicked
                 this.Header = "Settings";
                 this._allAppsPanelOpenStateCache = this.IsAllAppsPanelOpen;
                 this.IsAllAppsPanelEnabled = false;
                 this.IsAllAppsPanelOpen = false;
-                this._navigationService.NavigateTo(ViewModelLocator.NavigationPageNames.Settings);
-                return;
+                this._navigationService.NavigateTo(NavigationPageKeys.Settings);
             }
+        }
 
-            this.IsAllAppsPanelEnabled = true;
-            this.IsAllAppsPanelOpen = this._allAppsPanelOpenStateCache;
+        private void OnAllAppsToggleCommandAction()
+        {
+            this.IsAllAppsPanelOpen = !this.IsAllAppsPanelOpen;
+        }
 
-            switch (pageTag)
-            {
-                case "home":
-                    this.Header = "Home";
-                    this._navigationService.NavigateTo(ViewModelLocator.NavigationPageNames.Home);
-                    break;
-                case "theme":
-                    this.Header = "Theme";
-                    this._navigationService.NavigateTo(ViewModelLocator.NavigationPageNames.Theme);
-                    break;
-                case "styles":
-                    this.Header = "App Styling";
-                    this._navigationService.NavigateTo(ViewModelLocator.NavigationPageNames.Styles);
-                    break;
-            }
+        private void OnSaveCommandAction()
+        {
+            //TODO: Save the data
+            this.IsSaveRequired = false;
         }
         #endregion
     }

@@ -10,29 +10,30 @@
 
     <NavigationView x:Name="NavView"
                     Header="{Binding Header}"
-                    OpenPaneLength="250"  
+                    OpenPaneLength="230"  
                     CompactModeThresholdWidth="560" 
                     ExpandedModeThresholdWidth="560"
-                    Loaded="OnNavViewLoaded"
-                    SelectionChanged="OnNavViewSelectionChanged">
-
-        <NavigationView.MenuItems>
-            <NavigationViewItem x:Name="HomeNavItem" Content="Home" Tag="home">
-                <NavigationViewItem.Icon>
-                    <FontIcon Glyph="&#xE10F;"/>
-                </NavigationViewItem.Icon>
-            </NavigationViewItem>
-            <NavigationViewItem Content="Theme" Tag="theme">
-                <NavigationViewItem.Icon>
-                    <FontIcon Glyph="&#xE771;"/>
-                </NavigationViewItem.Icon>
-            </NavigationViewItem>
-            <NavigationViewItem Content="App Styling" Tag="styles">
-                <NavigationViewItem.Icon>
-                    <FontIcon Glyph="&#xED63;"/>
-                </NavigationViewItem.Icon>
-            </NavigationViewItem>
-        </NavigationView.MenuItems>
+                    MenuItemsSource="{Binding NavigationMenuItems}"
+                    SelectedItem="{Binding SelectedNavigationItem, Mode=TwoWay}"
+                    Loaded="OnNavViewLoaded">
+        <NavigationView.MenuItemTemplate>
+            <DataTemplate>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+                    <FontIcon Grid.Column="0" 
+                              Glyph="{Binding IconGlyph}" 
+                              FontSize="16"/>
+                    
+                    <TextBlock Grid.Column="1" 
+                               Margin="16,0,0,0" 
+                               VerticalAlignment="Center" 
+                               Text="{Binding Label}"/>
+                </Grid>
+            </DataTemplate>
+        </NavigationView.MenuItemTemplate>
 
         <NavigationView.HeaderTemplate>
             <DataTemplate>
@@ -53,11 +54,20 @@
                                 VerticalAlignment="Bottom"
                                 DefaultLabelPosition="Right" 
                                 Background="{ThemeResource SystemControlBackgroundChromeMediumLowBrush}">
-                        <AppBarToggleButton x:Name="ToggleAllAppBtn" 
-                                      Label="Show Apps" 
-                                      Checked="OnToggleAppsPanelCheckedChanged"
-                                      Unchecked="OnToggleAppsPanelCheckedChanged"
-                                      Style="{ThemeResource AppBarToggleButtonRevealLabelsOnRightStyle}">
+
+                        <AppBarButton IsEnabled="{Binding MainPage.IsSaveRequired, Source={StaticResource ViewModelLocator}}"
+                                      Label="Save"
+                                      Style="{ThemeResource AppBarButtonRevealLabelsOnRightStyle}"
+                                      Command="{Binding MainPage.SaveCommand, Source={StaticResource ViewModelLocator}}">
+                            <AppBarButton.Icon>
+                                <FontIcon Glyph="&#xE74E;"/>
+                            </AppBarButton.Icon>
+                        </AppBarButton>
+                        
+                        <AppBarToggleButton IsEnabled="{Binding MainPage.IsAllAppsPanelEnabled, Source={StaticResource ViewModelLocator}}"
+                                            Label="Show Apps"
+                                            Style="{ThemeResource AppBarToggleButtonRevealLabelsOnRightStyle}"
+                                            Command="{Binding MainPage.AllAppsToggleCommand, Source={StaticResource ViewModelLocator}}">
                             <AppBarToggleButton.Icon>
                                 <FontIcon Glyph="&#xE71D;"/>
                             </AppBarToggleButton.Icon>
@@ -68,9 +78,9 @@
         </NavigationView.HeaderTemplate        
 >
 
-        <SplitView x:Name="MainContentSplitView" 
-                   DisplayMode="Inline" 
-                   PanePlacement="Right" 
+        <SplitView DisplayMode="Inline" 
+                   PanePlacement="Right"
+                   IsPaneOpen="{Binding IsAllAppsPanelOpen}"
                    PaneBackground="{ThemeResource SystemControlAcrylicWindowBrush}">
             <SplitView.Pane>
                 <Grid>
