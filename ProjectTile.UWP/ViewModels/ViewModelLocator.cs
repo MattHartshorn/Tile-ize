@@ -23,8 +23,9 @@ namespace ProjectTile.UWP.ViewModels
             nav.Configure(NavigationPageKeys.Main, typeof(MainPageView));
             nav.Configure(NavigationPageKeys.Settings, typeof(SettingsPageView));
             nav.Configure(NavigationPageKeys.Home, typeof(HomePageView));
-            nav.Configure(NavigationPageKeys.Styles, typeof(StylesPageView));
             nav.Configure(NavigationPageKeys.Theme, typeof(ThemePageView));
+            nav.Configure(NavigationPageKeys.Styles, typeof(StylesPageView));
+            nav.Configure(NavigationPageKeys.SelectApp, typeof(SelectAppPageView));
 
 
             if (ViewModelBase.IsInDesignModeStatic)
@@ -38,11 +39,17 @@ namespace ProjectTile.UWP.ViewModels
 
             SimpleIoc.Default.Register<INavigationService>(() => nav);
             SimpleIoc.Default.Register<MainPageViewModel>();
+            SimpleIoc.Default.Register<HomePageViewModel>();
         }
 
         public MainPageViewModel MainPage
         {
             get { return ServiceLocator.Current.GetInstance<MainPageViewModel>(); }
+        }
+
+        public HomePageViewModel HomePage
+        {
+            get { return ServiceLocator.Current.GetInstance<HomePageViewModel>(); }
         }
     }
 }

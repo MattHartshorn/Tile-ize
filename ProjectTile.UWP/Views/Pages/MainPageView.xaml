@@ -15,6 +15,7 @@
                     ExpandedModeThresholdWidth="560"
                     MenuItemsSource="{Binding NavigationMenuItems}"
                     SelectedItem="{Binding SelectedNavigationItem, Mode=TwoWay}"
+                    Background="{ThemeResource SystemControlBackgroundChromeMediumLowBrush}"
                     Loaded="OnNavViewLoaded">
         <NavigationView.MenuItemTemplate>
             <DataTemplate>

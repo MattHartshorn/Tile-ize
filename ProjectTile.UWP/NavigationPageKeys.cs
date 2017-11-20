@@ -13,5 +13,6 @@ namespace ProjectTile.UWP
         public const string Settings = "SETTINGS";
         public const string Theme = "THEME";
         public const string Styles = "STYLES";
+        public const string SelectApp = "SELECTAPP";
     }
 }
