@@ -17,7 +17,7 @@ namespace ProjectTile.UWP.ViewModels
         #region Fields
         private readonly INavigationService _navigationService;
 
-        private ObservableCollection<NavigationMenuItemViewModel> _navMenuItems;
+        private ObservableCollection<NavigationItemViewModel> _navMenuItems;
         private object _selectedNavItem;
         private string _header;
         private string _toggleAllAppsBtnText;
@@ -33,11 +33,11 @@ namespace ProjectTile.UWP.ViewModels
             this.IsSaveRequired = false;
             this.IsAllAppsPanelEnabled = true;
 
-            this._navMenuItems = new ObservableCollection<NavigationMenuItemViewModel>
+            this._navMenuItems = new ObservableCollection<NavigationItemViewModel>
             {
-                new NavigationMenuItemViewModel("Home", "\uE10F", NavigationPageKeys.Home),
-                new NavigationMenuItemViewModel("Theme", "\uE771", NavigationPageKeys.Theme),
-                new NavigationMenuItemViewModel("App Styling", "\uED63", NavigationPageKeys.Styles)
+                new NavigationItemViewModel("Home", "\uE10F", NavigationPageKeys.Home),
+                new NavigationItemViewModel("Theme", "\uE771", NavigationPageKeys.Theme),
+                new NavigationItemViewModel("Application Styling", "\uED63", NavigationPageKeys.Styles)
             };
 
             this._navigationService = ServiceLocator.Current.GetInstance<INavigationService>();
@@ -58,7 +58,7 @@ namespace ProjectTile.UWP.ViewModels
             }
         }
 
-        public ObservableCollection<NavigationMenuItemViewModel> NavigationMenuItems
+        public ObservableCollection<NavigationItemViewModel> NavigationMenuItems
         {
             get { return this._navMenuItems; }
             set
@@ -133,7 +133,7 @@ namespace ProjectTile.UWP.ViewModels
         #region Private Methods
         private void OnSelectedNavigationItemChanged()
         {
-            var selectedItem =  this.SelectedNavigationItem as NavigationMenuItemViewModel;
+            var selectedItem =  this.SelectedNavigationItem as NavigationItemViewModel;
             if (selectedItem != null)
             {
                 this.IsAllAppsPanelEnabled = true;
@@ -148,7 +148,7 @@ namespace ProjectTile.UWP.ViewModels
                         this.Header = "Theme";
                         break;
                     case NavigationPageKeys.Styles:
-                        this.Header = "App Styling";
+                        this.Header = "Application Styling";
                         break;
                 }
 

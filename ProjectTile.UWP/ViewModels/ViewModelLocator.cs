@@ -25,7 +25,6 @@ namespace ProjectTile.UWP.ViewModels
             nav.Configure(NavigationPageKeys.Home, typeof(HomePageView));
             nav.Configure(NavigationPageKeys.Theme, typeof(ThemePageView));
             nav.Configure(NavigationPageKeys.Styles, typeof(StylesPageView));
-            nav.Configure(NavigationPageKeys.SelectApp, typeof(SelectAppPageView));
 
 
             if (ViewModelBase.IsInDesignModeStatic)

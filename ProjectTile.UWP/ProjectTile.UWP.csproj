@@ -99,13 +99,10 @@
     <Compile Include="Services\INavigationService.cs" />
     <Compile Include="Services\NavigationService.cs" />
     <Compile Include="ViewModels\HomePageViewModel.cs" />
-    <Compile Include="ViewModels\NavigationMenuItemViewModel.cs" />
+    <Compile Include="ViewModels\NavigationItemViewModel.cs" />
     <Compile Include="ViewModels\ThemeIconAppViewModel.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
-    <Compile Include="Views\Pages\SelectAppPageView.xaml.cs">
-      <DependentUpon>SelectAppPageView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\Pages\StylesPageView.xaml.cs">
       <DependentUpon>StylesPageView.xaml</DependentUpon>
     </Compile>
@@ -153,10 +150,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Page>
-    <Page Include="Views\Pages\SelectAppPageView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Pages\StylesPageView.xaml">
       <SubType>Designer</SubType>

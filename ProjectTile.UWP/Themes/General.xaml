@@ -4,7 +4,7 @@
     xmlns:local="using:ProjectTile.UWP.Themes">
 
     <Style x:Name="ImageRevealButton" TargetType="Button" BasedOn="{StaticResource ButtonRevealStyle}">
-        <Setter Property="Height" Value="40"/>
+        <Setter Property="MinHeight" Value="40"/>
         <Setter Property="Width" Value="180"/>
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="HorizontalContentAlignment" Value="Left"/>

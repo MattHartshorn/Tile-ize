@@ -13,7 +13,7 @@
         <StackPanel>
             <!-- Current Theme -->
             <StackPanel Margin="0,10,0,0">
-                <TextBlock Text="Current Theme" FontSize="20" />
+                <TextBlock Text="Current Theme: [PH] THEME_NAME" FontSize="20" />
 
                 <StackPanel Margin="0,10,0,0">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
@@ -23,25 +23,29 @@
                         </Grid>
 
                         <StackPanel Margin="15,0,0,0">
-                            <StackPanel.Resources>
-                                <Style TargetType="Button" BasedOn="{StaticResource ImageRevealButton}">
-                                    <Setter Property="Margin" Value="0,5,0,0"/>
-                                </Style>
-                            </StackPanel.Resources>
-                            <TextBlock Text="[PH] Theme Name" FontSize="18"/>
 
-                            <StackPanel Margin="0,5,0,0">
-                                <Button>
+                            <StackPanel>
+                                <Button Style="{StaticResource ImageRevealButton}">
                                     <StackPanel Orientation="Horizontal">
-                                        <FontIcon Glyph="&#xE771;"/>
-                                        <TextBlock Margin="10,0" Text="Edit Theme"/>
+                                        <FontIcon Glyph="&#xE771;" VerticalAlignment="Top"/>
+                                        <StackPanel Margin="10,0">
+                                            <TextBlock Text="Edit Theme"/>
+                                            <TextBlock FontSize="{ThemeResource ToolTipContentThemeFontSize}" 
+                                                       Foreground="{ThemeResource SystemControlBackgroundBaseMediumBrush}"
+                                                       Text="[PH] 10 Applications"/>
+                                        </StackPanel>
                                     </StackPanel>
                                 </Button>
 
-                                <Button>
+                                <Button Margin="0,5,0,0" Style="{StaticResource ImageRevealButton}">
                                     <StackPanel Orientation="Horizontal">
                                         <FontIcon Glyph="&#xED63;"/>
-                                        <TextBlock Margin="10,0" Text="App Styling"/>
+                                        <StackPanel Margin="10,0">
+                                            <TextBlock Text="Application Styling"/>
+                                            <TextBlock FontSize="{ThemeResource ToolTipContentThemeFontSize}" 
+                                                       Foreground="{ThemeResource SystemControlBackgroundBaseMediumBrush}"
+                                                       Text="[PH] No App Selected"/>
+                                        </StackPanel>
                                     </StackPanel>
                                 </Button>
                             </StackPanel>
@@ -59,9 +63,9 @@
             <!--- Saved Themes -->
             <StackPanel Margin="0,50,0,0">
                 <StackPanel Orientation="Horizontal" >
-                    <TextBlock Text="Saved Themes" FontSize="20" />
+                    <TextBlock Text="Saved Themes" FontSize="20" VerticalAlignment="Center" />
 
-                    <Button Margin="20,0,0,0" MinWidth="120" Background="Transparent">
+                    <Button Style="{StaticResource ImageRevealButton}" Margin="20,0,0,0">
                         <StackPanel Orientation="Horizontal">
                             <FontIcon Glyph="&#xE710;"/>
                             <TextBlock Margin="10,0" Text="New Theme"/>

@@ -8,24 +8,24 @@ using Windows.UI.Xaml.Controls;
 
 namespace ProjectTile.UWP.ViewModels
 {
-    class NavigationMenuItemViewModel : ViewModelBase
+    class NavigationItemViewModel : ViewModelBase
     {
         private string _label;
         private string _iconGlyph;
         private object _tag;
 
 
-        public NavigationMenuItemViewModel()
+        public NavigationItemViewModel()
         {
 
         }
 
-        public NavigationMenuItemViewModel(string label, string iconGlyph)
+        public NavigationItemViewModel(string label, string iconGlyph)
             : this(label, iconGlyph, null)
         {
         }
 
-        public NavigationMenuItemViewModel(string label, string iconGlyph, object tag)
+        public NavigationItemViewModel(string label, string iconGlyph, object tag)
         {
             this._label = label;
             this._iconGlyph = iconGlyph;

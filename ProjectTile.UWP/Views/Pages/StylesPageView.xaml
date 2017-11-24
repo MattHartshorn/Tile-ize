@@ -7,7 +7,88 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="Transparent">
+    <ScrollViewer>
+        <StackPanel Margin="0,10,0,0">
+            <TextBlock Text="[PH] App Name" FontSize="20"/>
 
-    </Grid>
+            <!-- Tile Preview, Display Name, Icons -->
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Grid Background="Red" 
+                      Height="150" 
+                      Width="150"
+                      VerticalAlignment="Bottom">
+                            <Image/>
+                            <TextBlock/>
+                        </Grid>
+
+                        <Grid Margin="10,0"
+                      Background="Red" 
+                      Height="70" 
+                      Width="70"
+                      VerticalAlignment="Bottom">
+                        </Grid>
+
+                        <Grid Background="Red" 
+                      Height="44" 
+                      Width="44"
+                      VerticalAlignment="Bottom">
+                        </Grid>
+                    </StackPanel>
+
+                    <StackPanel Margin="0,5,0,0" Orientation="Horizontal">
+                        <TextBlock Text="Reset Icon:" VerticalAlignment="Center"/>
+                        
+                        <HyperlinkButton Margin="10,0,0,0">
+                            <TextBlock Text="150px"/>
+                        </HyperlinkButton>
+
+                        <HyperlinkButton Margin="15,0,0,0">
+                            <TextBlock Text="70px"/>
+                        </HyperlinkButton>
+
+                        <HyperlinkButton Margin="15,0,0,0">
+                            <TextBlock Text="44px"/>
+                        </HyperlinkButton>
+                    </StackPanel>
+                </StackPanel>
+                
+
+                <StackPanel>
+                    <TextBlock Text="Display Name"/>
+                    <TextBox Margin="0,5,0,0" Text="[PH] App Display Name" Width="400"/>
+                </StackPanel>
+            </StackPanel>
+
+            <!-- Colors -->
+            <StackPanel Margin="0,25,0,0">
+                <TextBlock Text="Choose your background color" FontSize="20"/>
+
+                <!-- Recent Colors -->
+                <StackPanel Margin="0,10,0,0">
+                    <TextBlock Text="Recent Colors" FontSize="18"/>
+
+                    <GridView Margin="0,10,0,0"
+                          ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                          ScrollViewer.VerticalScrollMode="Disabled">
+                        <GridView.ItemContainerStyle>
+                            <Style TargetType="GridViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                            </Style>
+                        </GridView.ItemContainerStyle>
+
+                        <Grid Width="50" Height="50" Background="black"/>
+                        <Grid Width="50" Height="50" Background="black"/>
+                        <Grid Width="50" Height="50" Background="black"/>
+                        <Grid Width="50" Height="50" Background="black"/>
+                    </GridView>
+                </StackPanel>
+                
+                <!-- -->
+                
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
 </Page>
