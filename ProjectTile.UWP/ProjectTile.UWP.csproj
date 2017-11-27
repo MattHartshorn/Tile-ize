@@ -98,9 +98,11 @@
     <Compile Include="NavigationPageKeys.cs" />
     <Compile Include="Services\INavigationService.cs" />
     <Compile Include="Services\NavigationService.cs" />
+    <Compile Include="Util\SolidColorBrushConverter.cs" />
     <Compile Include="ViewModels\HomePageViewModel.cs" />
     <Compile Include="ViewModels\NavigationItemViewModel.cs" />
     <Compile Include="ViewModels\ThemeIconAppViewModel.cs" />
+    <Compile Include="ViewModels\ThemeItemViewModel.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="Views\Pages\StylesPageView.xaml.cs">

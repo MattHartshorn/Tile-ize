@@ -57,17 +57,17 @@
                                 DefaultLabelPosition="Right" 
                                 Background="{ThemeResource SystemControlBackgroundChromeMediumLowBrush}">
 
-                        <AppBarButton IsEnabled="{Binding MainPage.IsSaveRequired, Source={StaticResource ViewModelLocator}}"
+                        <!--AppBarButton IsEnabled="{Binding MainPage.IsSaveRequired, Source={StaticResource ViewModelLocator}}"
                                       Label="Save"
                                       Style="{ThemeResource AppBarButtonRevealLabelsOnRightStyle}"
                                       Command="{Binding MainPage.SaveCommand, Source={StaticResource ViewModelLocator}}">
                             <AppBarButton.Icon>
                                 <FontIcon Glyph="&#xE74E;"/>
                             </AppBarButton.Icon>
-                        </AppBarButton>
+                        </-->
                         
                         <AppBarToggleButton IsEnabled="{Binding MainPage.IsAllAppsPanelEnabled, Source={StaticResource ViewModelLocator}}"
-                                            Label="Show Apps"
+                                            Label="{Binding MainPage.ToggleAllAppsBtnText, Source={StaticResource ViewModelLocator}}"
                                             Style="{ThemeResource AppBarToggleButtonRevealLabelsOnRightStyle}"
                                             Command="{Binding MainPage.AllAppsToggleCommand, Source={StaticResource ViewModelLocator}}">
                             <AppBarToggleButton.Icon>

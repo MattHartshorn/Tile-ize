@@ -7,7 +7,9 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     d:DesignHeight="185"
-    d:DesignWidth="328">
+    d:DesignWidth="328"
+    Height="185"
+    Width="328">
 
     <Grid Background="Black">
         
@@ -34,7 +36,7 @@
                                         <ColumnDefinition Width="2" />
                                         <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
-                                    <Rectangle Height="8" Width="8" Fill="{Binding}" Grid.Column="0" />
+                                    <Rectangle Height="10" Width="10" Fill="{Binding}" Grid.Column="0" />
                                     <Rectangle Height="2" Fill="White" Grid.Column="2"/>
                                 </Grid>
                             </DataTemplate>
@@ -42,9 +44,40 @@
                     </ItemsControl>
                 </StackPanel>
 
-                <Grid Margin="30,0,0,0" Width="120">
+                <StackPanel Margin="30,0,0,0" Width="105">
+                    <Rectangle Fill="White" Height="2" Width="45" HorizontalAlignment="Left"/>
+
+                    <VariableSizedWrapGrid x:Name="AppGrid"
+                                           ItemHeight="25" 
+                                           ItemWidth="25"
+                                           Orientation="Horizontal">
+                        <VariableSizedWrapGrid.Resources>
+                            <Style TargetType="Rectangle">
+                                <Setter Property="Margin" Value="1"/>
+                                <Setter Property="Fill" Value="{ThemeResource SystemControlAccentAcrylicElementAccentMediumHighBrush}"/>
+                            </Style>
+                        </VariableSizedWrapGrid.Resources>
+                        
+                        <Rectangle VariableSizedWrapGrid.ColumnSpan="2" 
+                                   VariableSizedWrapGrid.RowSpan="2" />
+
+                        <Rectangle />
+
+                        <Rectangle />
+
+                        <Rectangle VariableSizedWrapGrid.ColumnSpan="2" />
+
+                        <Rectangle />
+                        
+                        <Rectangle />
+                        
+                        <Rectangle VariableSizedWrapGrid.ColumnSpan="2" 
+                                   VariableSizedWrapGrid.RowSpan="2" />
+                        
+                        <Rectangle />
+                    </VariableSizedWrapGrid>
+                </StackPanel>
                     
-                </Grid>
             </StackPanel>
 
             <Rectangle Height="10" Fill="{ThemeResource SystemControlAccentAcrylicElementAccentMediumHighBrush}"/>

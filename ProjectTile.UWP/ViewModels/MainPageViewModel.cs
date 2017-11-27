@@ -40,6 +40,7 @@ namespace ProjectTile.UWP.ViewModels
                 new NavigationItemViewModel("Application Styling", "\uE70F", NavigationPageKeys.Styles)
             };
 
+            this.ToggleAllAppsBtnText = "Show All Apps";
             this._navigationService = ServiceLocator.Current.GetInstance<INavigationService>();
             this.AllAppsToggleCommand = new RelayCommand(OnAllAppsToggleCommandAction, () => this.IsAllAppsPanelEnabled);
             this.SaveCommand = new RelayCommand(OnSaveCommandAction, () => this.IsSaveRequired);
@@ -188,6 +189,7 @@ namespace ProjectTile.UWP.ViewModels
         private void OnAllAppsToggleCommandAction()
         {
             this.IsAllAppsPanelOpen = !this.IsAllAppsPanelOpen;
+            this.ToggleAllAppsBtnText = (this.IsAllAppsPanelOpen) ? "Hide All Apps" : "Show All Apps";
         }
 
         private void OnSaveCommandAction()

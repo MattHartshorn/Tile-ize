@@ -8,6 +8,30 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     DataContext="{Binding HomePage, Source={StaticResource ViewModelLocator}}">
+    <Page.Resources>
+        <Style TargetType="GridView">
+            <Setter Property="ItemTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <StackPanel Padding="10">
+                            <v:ThemeIconView/>
+
+                            <TextBlock Margin="0,10,0,0" 
+                                           FontSize="18" 
+                                           Text="[PH] Theme Name"/>
+
+                            <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
+                                <TextBlock Text="[PH] 0" Foreground="{ThemeResource SystemControlBackgroundBaseMediumBrush}"/>
+                                <TextBlock Text=" Applications" Foreground="{ThemeResource SystemControlBackgroundBaseMediumBrush}"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Disabled"/>
+            <Setter Property="ScrollViewer.VerticalScrollMode" Value="Disabled"/>
+        </Style>
+    </Page.Resources>
 
     <ScrollViewer>
         <StackPanel>
@@ -21,8 +45,7 @@
                 <StackPanel Margin="0,10,0,0">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                         <!-- PLACEHOLDER ICON -->
-                        <Grid Width="328" Height="185" Background="black">
-                        </Grid>
+                        <v:ThemeIconView Width="328" Height="185" Background="black" />
 
                         <!-- Navigation Buttons -->
                         <StackPanel Margin="15,0,0,0">
@@ -71,37 +94,22 @@
 
             <!--- Saved Themes -->
             <StackPanel Margin="0,50,0,0">
-                <StackPanel Orientation="Horizontal" >
-                    <TextBlock Text="Saved Themes" FontSize="20" VerticalAlignment="Center" />
+                <TextBlock Text="Saved Themes" FontSize="20" />
+                
+                <TextBlock Margin="0,10" Text="Select one of the saved themes to become the current theme or create a new theme."/>
 
-                    <Button Style="{StaticResource ImageRevealButton}" Margin="20,0,0,0">
-                        <StackPanel Orientation="Horizontal">
-                            <FontIcon Glyph="&#xE710;"/>
-                            <TextBlock Margin="10,0" Text="New Theme"/>
-                        </StackPanel>
-                    </Button>
+                <Button Content="New Theme" Width="120"/>
 
-                </StackPanel>
-
-
-                <GridView Margin="0,10,0,0">
-                    <Grid Width="328" Height="185" Background="black">
-                    </Grid>
-                </GridView>
+                <GridView Margin="0,10,0,0"/>
             </StackPanel>
-
 
             <!--- Default Themes -->
             <StackPanel Margin="0,50,0,0">
                 <TextBlock Text="Default Themes" FontSize="20" />
 
-                <GridView Margin="0,10,0,0">
-                    <Grid Width="328" Height="185" Background="black">
-                    </Grid>
+                <TextBlock Margin="0,10" Text="Select one of the two types of default themes to become the current theme."/>
 
-                    <Grid Width="328" Height="185" Background="black">
-                    </Grid>
-                </GridView>
+                <GridView Margin="0,10,0,0"/>
             </StackPanel>
         </StackPanel>
     </ScrollViewer>
