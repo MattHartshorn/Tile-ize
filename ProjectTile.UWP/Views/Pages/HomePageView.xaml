@@ -13,42 +13,51 @@
         <StackPanel>
             <!-- Current Theme -->
             <StackPanel Margin="0,10,0,0">
-                <TextBlock Text="Current Theme: [PH] THEME_NAME" FontSize="20" />
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Current Theme: " FontSize="20" />
+                    <TextBlock Text="{Binding CurrentThemeName}" FontSize="20" />
+                </StackPanel>
 
                 <StackPanel Margin="0,10,0,0">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                        
                         <!-- PLACEHOLDER ICON -->
                         <Grid Width="328" Height="185" Background="black">
                         </Grid>
 
+                        <!-- Navigation Buttons -->
                         <StackPanel Margin="15,0,0,0">
-
-                            <StackPanel>
-                                <Button Style="{StaticResource ImageRevealButton}">
-                                    <StackPanel Orientation="Horizontal">
-                                        <FontIcon Glyph="&#xE771;" VerticalAlignment="Top"/>
-                                        <StackPanel Margin="10,0">
-                                            <TextBlock Text="Edit Theme"/>
-                                            <TextBlock FontSize="{ThemeResource ToolTipContentThemeFontSize}" 
-                                                       Foreground="{ThemeResource SystemControlBackgroundBaseMediumBrush}"
-                                                       Text="[PH] 10 Applications"/>
+                            <!-- Edit Theme -->
+                            <Button Style="{StaticResource ImageRevealButton}"
+                                    Command="{Binding NavigateEditThemeCommand}">
+                                <StackPanel Orientation="Horizontal">
+                                    <FontIcon Glyph="&#xE771;" VerticalAlignment="Top"/>
+                                    <StackPanel Margin="10,0">
+                                        <TextBlock Text="Edit Theme"/>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock FontSize="12" 
+                                                   Foreground="{ThemeResource SystemControlBackgroundBaseMediumBrush}"
+                                                   Text="{Binding CurrentThemeAppCount}"/>
+                                            <TextBlock FontSize="12" 
+                                                   Foreground="{ThemeResource SystemControlBackgroundBaseMediumBrush}"
+                                                   Text=" Applications"/>
                                         </StackPanel>
                                     </StackPanel>
-                                </Button>
+                                </StackPanel>
+                            </Button>
 
-                                <Button Margin="0,5,0,0" Style="{StaticResource ImageRevealButton}">
-                                    <StackPanel Orientation="Horizontal">
-                                        <FontIcon Glyph="&#xED63;"/>
-                                        <StackPanel Margin="10,0">
-                                            <TextBlock Text="Application Styling"/>
-                                            <TextBlock FontSize="{ThemeResource ToolTipContentThemeFontSize}" 
-                                                       Foreground="{ThemeResource SystemControlBackgroundBaseMediumBrush}"
-                                                       Text="[PH] No App Selected"/>
-                                        </StackPanel>
+                            <!-- Edit App Style -->
+                            <Button Margin="0,5,0,0" Style="{StaticResource ImageRevealButton}"
+                                    Command="{Binding NavigateEditAppStyleCommand}">
+                                <StackPanel Orientation="Horizontal">
+                                    <FontIcon Glyph="&#xE70F;"/>
+                                    <StackPanel Margin="10,0">
+                                        <TextBlock Text="Application Styling"/>
+                                        <TextBlock FontSize="12" 
+                                                    Foreground="{ThemeResource SystemControlBackgroundBaseMediumBrush}"
+                                                    Text="{Binding SelectedAppName}"/>
                                     </StackPanel>
-                                </Button>
-                            </StackPanel>
+                                </StackPanel>
+                            </Button>
                         </StackPanel>
                     </StackPanel>
 
@@ -73,18 +82,9 @@
                     </Button>
 
                 </StackPanel>
-                
 
-                <GridView Margin="0,10,0,0"
-                          ScrollViewer.VerticalScrollBarVisibility="Disabled"
-                          ScrollViewer.VerticalScrollMode="Disabled">
-                    <GridView.ItemContainerStyle>
-                        <Style TargetType="GridViewItem">
-                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                            <Setter Property="HorizontalAlignment" Value="Stretch"/>
-                        </Style>
-                    </GridView.ItemContainerStyle>
 
+                <GridView Margin="0,10,0,0">
                     <Grid Width="328" Height="185" Background="black">
                     </Grid>
                 </GridView>
@@ -95,16 +95,7 @@
             <StackPanel Margin="0,50,0,0">
                 <TextBlock Text="Default Themes" FontSize="20" />
 
-                <GridView Margin="0,10,0,0"
-                          ScrollViewer.VerticalScrollBarVisibility="Disabled"
-                          ScrollViewer.VerticalScrollMode="Disabled">
-                    <GridView.ItemContainerStyle>
-                        <Style TargetType="GridViewItem">
-                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                            <Setter Property="HorizontalAlignment" Value="Stretch"/>
-                        </Style>
-                    </GridView.ItemContainerStyle>
-
+                <GridView Margin="0,10,0,0">
                     <Grid Width="328" Height="185" Background="black">
                     </Grid>
 

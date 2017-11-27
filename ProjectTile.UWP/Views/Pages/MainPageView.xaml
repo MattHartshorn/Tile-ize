@@ -16,7 +16,8 @@
                     MenuItemsSource="{Binding NavigationMenuItems}"
                     SelectedItem="{Binding SelectedNavigationItem, Mode=TwoWay}"
                     Background="{ThemeResource SystemControlBackgroundChromeMediumLowBrush}"
-                    Loaded="OnNavViewLoaded">
+                    Loaded="OnNavViewLoaded"
+                    IsPaneOpen="False">
         <NavigationView.MenuItemTemplate>
             <DataTemplate>
                 <Grid>

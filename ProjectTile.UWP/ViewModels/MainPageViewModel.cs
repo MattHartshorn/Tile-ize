@@ -37,7 +37,7 @@ namespace ProjectTile.UWP.ViewModels
             {
                 new NavigationItemViewModel("Home", "\uE10F", NavigationPageKeys.Home),
                 new NavigationItemViewModel("Theme", "\uE771", NavigationPageKeys.Theme),
-                new NavigationItemViewModel("Application Styling", "\uED63", NavigationPageKeys.Styles)
+                new NavigationItemViewModel("Application Styling", "\uE70F", NavigationPageKeys.Styles)
             };
 
             this._navigationService = ServiceLocator.Current.GetInstance<INavigationService>();
@@ -130,16 +130,45 @@ namespace ProjectTile.UWP.ViewModels
         }
         #endregion
 
+        #region Public Methods
+        public bool SelectNavigationItem(string pageKey)
+        {
+            if (pageKey != null)
+            {
+                foreach (var item in this._navMenuItems)
+                {
+                    if (item.Tag.Equals(pageKey))
+                    {
+                        this.SelectedNavigationItem = item;
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+        #endregion
+
         #region Private Methods
         private void OnSelectedNavigationItemChanged()
         {
-            var selectedItem =  this.SelectedNavigationItem as NavigationItemViewModel;
-            if (selectedItem != null)
+            var selectedItem = this.SelectedNavigationItem as NavigationItemViewModel;
+            string pageKey = (selectedItem != null) ? selectedItem.Tag as string : NavigationPageKeys.Settings;
+
+            if (pageKey == NavigationPageKeys.Settings)
+            {
+                // Settings navigation item clicked
+                this.Header = "Settings";
+                this._allAppsPanelOpenStateCache = this.IsAllAppsPanelOpen;
+                this.IsAllAppsPanelEnabled = false;
+                this.IsAllAppsPanelOpen = false;
+                this._navigationService.NavigateTo(NavigationPageKeys.Settings);
+            }
+            else
             {
                 this.IsAllAppsPanelEnabled = true;
                 this.IsAllAppsPanelOpen = this._allAppsPanelOpenStateCache;
 
-                switch (selectedItem.Tag)
+                switch (pageKey)
                 {
                     case NavigationPageKeys.Home:
                         this.Header = "Home";
@@ -152,16 +181,7 @@ namespace ProjectTile.UWP.ViewModels
                         break;
                 }
 
-                this._navigationService.NavigateTo(selectedItem.Tag as string);
-            }
-            else
-            {
-                // Settings navigation item clicked
-                this.Header = "Settings";
-                this._allAppsPanelOpenStateCache = this.IsAllAppsPanelOpen;
-                this.IsAllAppsPanelEnabled = false;
-                this.IsAllAppsPanelOpen = false;
-                this._navigationService.NavigateTo(NavigationPageKeys.Settings);
+                this._navigationService.NavigateTo(pageKey);
             }
         }
 

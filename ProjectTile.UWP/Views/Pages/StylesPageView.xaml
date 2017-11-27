@@ -9,85 +9,173 @@
 
     <ScrollViewer>
         <StackPanel Margin="0,10,0,0">
-            <TextBlock Text="[PH] App Name" FontSize="20"/>
-
             <!-- Tile Preview, Display Name, Icons -->
-            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                <StackPanel>
+            <RelativePanel Margin="0,10,0,0">
+                <StackPanel x:Name="TilePreviewPanel" Margin="0,0,10,0">
                     <StackPanel Orientation="Horizontal">
                         <Grid Background="Red" 
-                      Height="150" 
-                      Width="150"
-                      VerticalAlignment="Bottom">
+                              Height="150" 
+                              Width="150"
+                              VerticalAlignment="Bottom">
                             <Image/>
                             <TextBlock/>
                         </Grid>
 
                         <Grid Margin="10,0"
-                      Background="Red" 
-                      Height="70" 
-                      Width="70"
-                      VerticalAlignment="Bottom">
+                              Background="Red" 
+                              Height="70" 
+                              Width="70"
+                              VerticalAlignment="Bottom">
                         </Grid>
 
                         <Grid Background="Red" 
-                      Height="44" 
-                      Width="44"
-                      VerticalAlignment="Bottom">
+                              Height="44" 
+                              Width="44"
+                              VerticalAlignment="Bottom">
                         </Grid>
                     </StackPanel>
 
+                    <!-- Reset Icons -->
                     <StackPanel Margin="0,5,0,0" Orientation="Horizontal">
                         <TextBlock Text="Reset Icon:" VerticalAlignment="Center"/>
-                        
+
                         <HyperlinkButton Margin="10,0,0,0">
-                            <TextBlock Text="150px"/>
+                            <TextBlock Text="Large"/>
                         </HyperlinkButton>
 
                         <HyperlinkButton Margin="15,0,0,0">
-                            <TextBlock Text="70px"/>
+                            <TextBlock Text="Medium"/>
                         </HyperlinkButton>
 
                         <HyperlinkButton Margin="15,0,0,0">
-                            <TextBlock Text="44px"/>
+                            <TextBlock Text="Small"/>
                         </HyperlinkButton>
                     </StackPanel>
                 </StackPanel>
                 
+                <!-- App Name, Details, & Display Name -->
+                <StackPanel RelativePanel.RightOf="TilePreviewPanel">
+                    <TextBlock Text="Application"/>
+                    <TextBlock Margin="0,5,0,0" Text="[PH] App Shortcut Name"/>
+                    <HyperlinkButton>
+                        <TextBlock Text="Show Details"/>
+                    </HyperlinkButton>
 
-                <StackPanel>
-                    <TextBlock Text="Display Name"/>
-                    <TextBox Margin="0,5,0,0" Text="[PH] App Display Name" Width="400"/>
+                    <TextBlock Margin="0,10,0,0" Text="Display Name"/>
+                    <TextBox Margin="0,5,0,0"
+                             Text="[PH] App Display Name" 
+                             Width="400"/>
                 </StackPanel>
-            </StackPanel>
+
+                <!-- Application Details -->
+                <StackPanel Margin="0,10,0,0"  
+                            RelativePanel.Below="TilePreviewPanel"
+                            Visibility="Collapsed">
+                    <TextBlock FontSize="20" Text="Application Details"/>
+                    
+                    <TextBlock Margin="0,15,0,0" Text="Shortcut Location"/>
+                    <TextBox Margin="0,5,0,0"
+                             HorizontalAlignment="Left"
+                             Text="[PH] C:\ProgramData\Microsoft\Windows\StartMenu\App.lnk"
+                             Width="500"
+                             IsEnabled="False"/>
+                    
+                    <TextBlock Margin="0,10,0,0" Text="Executable Location"/>
+                    <TextBox Margin="0,5,0,0"
+                             HorizontalAlignment="Left"
+                             Text="[PH] C:\Program Files\Company\App\Bin\app.exe"
+                             Width="500"
+                             IsEnabled="False"/>
+                </StackPanel>
+            </RelativePanel>
 
             <!-- Colors -->
-            <StackPanel Margin="0,25,0,0">
+            <StackPanel Margin="0,25,0,0" HorizontalAlignment="Left">
                 <TextBlock Text="Choose your background color" FontSize="20"/>
 
                 <!-- Recent Colors -->
                 <StackPanel Margin="0,10,0,0">
+                    
+                    <!-- Recent Colors -->
                     <TextBlock Text="Recent Colors" FontSize="18"/>
 
-                    <GridView Margin="0,10,0,0"
-                          ScrollViewer.VerticalScrollBarVisibility="Disabled"
-                          ScrollViewer.VerticalScrollMode="Disabled">
-                        <GridView.ItemContainerStyle>
-                            <Style TargetType="GridViewItem">
-                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                <Setter Property="HorizontalAlignment" Value="Stretch"/>
-                            </Style>
-                        </GridView.ItemContainerStyle>
-
+                    <GridView Margin="0,10,0,0">
                         <Grid Width="50" Height="50" Background="black"/>
                         <Grid Width="50" Height="50" Background="black"/>
                         <Grid Width="50" Height="50" Background="black"/>
                         <Grid Width="50" Height="50" Background="black"/>
                     </GridView>
                 </StackPanel>
-                
-                <!-- -->
-                
+
+                <!-- Windows Colors -->
+                <StackPanel Margin="0,10,0,0">
+                    <TextBlock FontSize="18"
+                               Text="Windows Colors" />
+
+                    <GridView Margin="0,10,0,0">
+                        <GridView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <ItemsWrapGrid MaximumRowsOrColumns="8" Orientation="Horizontal" />
+                            </ItemsPanelTemplate>
+                        </GridView.ItemsPanel>
+                        <Grid Width="50" Height="50" Background="black"/>
+                        <Grid Width="50" Height="50" Background="black"/>
+                        <Grid Width="50" Height="50" Background="black"/>
+                        <Grid Width="50" Height="50" Background="black"/>
+                        <Grid Width="50" Height="50" Background="black"/>
+                        <Grid Width="50" Height="50" Background="black"/>
+                        <Grid Width="50" Height="50" Background="black"/>
+                        <Grid Width="50" Height="50" Background="black"/>
+                        <Grid Width="50" Height="50" Background="black"/>
+                        <Grid Width="50" Height="50" Background="black"/>
+                        <Grid Width="50" Height="50" Background="black"/>
+                        <Grid Width="50" Height="50" Background="black"/>
+                    </GridView>
+                </StackPanel>
+
+                <!-- Custom Color -->
+                <Button HorizontalAlignment="Stretch" 
+                            Height="48" 
+                            HorizontalContentAlignment="Left"
+                            Background="Transparent">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Border Height="35"
+                                    Width="35" 
+                                    HorizontalAlignment="Left"
+                                    Background="{ThemeResource SystemControlBackgroundBaseLowBrush}">
+                            <FontIcon Glyph="&#xE710;"/>
+                        </Border>
+
+                        <TextBlock Margin="10,0,0,0" 
+                                       Grid.Column="1" 
+                                       VerticalAlignment="Center"
+                                       Text="Custom Color"/>
+                    </Grid>
+                </Button>
+            </StackPanel>
+
+            <!-- Font -->
+            <StackPanel Margin="0,25,0,0" >
+                <TextBlock Text="Change your text settings" FontSize="20"/>
+
+                <!-- Font Theme -->
+                <StackPanel Margin="0,10,0,0">
+                    <TextBlock Text="Font Theme" FontSize="18"/>
+
+                    <RadioButton Content="Light"/>
+                    <RadioButton Content="Dark"/>
+                </StackPanel>
+
+                <StackPanel Margin="0,20,0,0">
+                    <TextBlock Text="Display text on large tile" FontSize="18"/>
+
+                    <ToggleSwitch/>
+                </StackPanel>
             </StackPanel>
         </StackPanel>
     </ScrollViewer>
