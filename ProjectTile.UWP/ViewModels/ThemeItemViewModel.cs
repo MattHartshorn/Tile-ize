@@ -14,32 +14,52 @@ namespace ProjectTile.UWP.ViewModels
     {
         private string _themeName;
         private string _imageSourceUri;
-        private int _styledAppsCount;
+        private int _styledAppCount;
         private ObservableCollection<string> _appColorHexItems;
 
+        public ThemeItemViewModel()
+        {
+            this._appColorHexItems = new ObservableCollection<string>();
+        }
 
         public string ThemeName
         {
-            get;
-            set;
+            get { return this._themeName; }
+            set
+            {
+                this._themeName = value;
+                RaisePropertyChanged(nameof(ThemeName));
+            }
         }
 
-        public int StyledAppsCount
+        public int StyledAppCount
         {
-            get;
-            set;
+            get { return this._styledAppCount; }
+            set
+            {
+                this._styledAppCount = value;
+                RaisePropertyChanged(nameof(StyledAppCount));
+            }
         }
 
         public string ImageSourceUri
         {
-            get;
-            set;
+            get { return this._imageSourceUri; }
+            set
+            {
+                this._imageSourceUri = value;
+                RaisePropertyChanged(nameof(ImageSourceUri));
+            }
         }
 
         public ObservableCollection<string> AppColorHexItems
         {
-            get;
-            set;
+            get { return this._appColorHexItems; }
+            set
+            {
+                this._appColorHexItems = value;
+                RaisePropertyChanged(nameof(AppColorHexItems));
+            }
         }
     }
 }

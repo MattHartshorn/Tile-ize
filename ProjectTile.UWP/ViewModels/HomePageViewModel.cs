@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,6 +8,7 @@ using Microsoft.Practices.ServiceLocation;
 using ProjectTile.UWP.Services;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using Windows.UI.Xaml;
 
 namespace ProjectTile.UWP.ViewModels
 {
@@ -17,6 +19,9 @@ namespace ProjectTile.UWP.ViewModels
         private string _currentThemeName;
         private int _currentThemeAppCount;
         private string _selectedAppName;
+        private Visibility _isSavedThemesVisible;
+        private ObservableCollection<ThemeItemViewModel> _savedThemes;
+        private ObservableCollection<ThemeItemViewModel> _defaultThemes;
 
 
         public HomePageViewModel()
@@ -25,6 +30,17 @@ namespace ProjectTile.UWP.ViewModels
 
             this.NavigateEditThemeCommand = new RelayCommand(OnNavigateEditThemeCommandAction);
             this.NavigateEditAppStyleCommand = new RelayCommand(OnNavigateEditAppStyleCommand);
+
+            this._isSavedThemesVisible = Visibility.Collapsed;
+            this._savedThemes = new ObservableCollection<ThemeItemViewModel>();
+            this._defaultThemes = new ObservableCollection<ThemeItemViewModel>
+            {
+                new ThemeItemViewModel()
+                {
+                    ThemeName = "Empty Theme",
+                    StyledAppCount = 0,
+                }
+            };
         }
 
 
@@ -55,6 +71,36 @@ namespace ProjectTile.UWP.ViewModels
             {
                 this._selectedAppName = value;
                 RaisePropertyChanged(nameof(SelectedAppName));
+            }
+        }
+
+        public Visibility IsSavedThemesVisible
+        {
+            get { return this._isSavedThemesVisible; }
+            set
+            {
+                this._isSavedThemesVisible = value;
+                RaisePropertyChanged(nameof(IsSavedThemesVisible));
+            }
+        }
+
+        public ObservableCollection<ThemeItemViewModel> SavedThemes
+        {
+            get { return this._savedThemes; }
+            set
+            {
+                this._savedThemes = value;
+                RaisePropertyChanged(nameof(SavedThemes));
+            }
+        }
+
+        public ObservableCollection<ThemeItemViewModel> DefaultThemes
+        {
+            get { return this._defaultThemes; }
+            set
+            {
+                this._defaultThemes = value;
+                RaisePropertyChanged(nameof(DefaultThemes));
             }
         }
 

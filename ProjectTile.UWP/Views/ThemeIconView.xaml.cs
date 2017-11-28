@@ -52,7 +52,17 @@ namespace ProjectTile.UWP.Views
         public ImageSource ThemeBackgroundSource
         {
             get { return GetValue(ThemeBackgroundSourceProperty) as ImageSource; }
-            set { SetValue(ThemeBackgroundSourceProperty, value); }
+            set
+            {
+                if (value == null)
+                {
+                    SetValue(ThemeBackgroundSourceProperty, new Uri("ms-appx:///Assets/DefaultThemeBackground.png", UriKind.Absolute));
+                }
+                else
+                {
+                    SetValue(ThemeBackgroundSourceProperty, value);
+                }
+            }
         }
 
         public object AppColorItemSource

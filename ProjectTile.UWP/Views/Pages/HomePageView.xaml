@@ -14,14 +14,15 @@
                 <Setter.Value>
                     <DataTemplate>
                         <StackPanel Padding="10">
-                            <v:ThemeIconView/>
+                            <v:ThemeIconView  ThemeBackgroundSource="{Binding ImageSourceUri}" 
+                                              AppColorItemSource="{Binding AppColorHexItems}"/>
 
                             <TextBlock Margin="0,10,0,0" 
                                            FontSize="18" 
-                                           Text="[PH] Theme Name"/>
+                                           Text="{Binding ThemeName}"/>
 
                             <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
-                                <TextBlock Text="[PH] 0" Foreground="{ThemeResource SystemControlBackgroundBaseMediumBrush}"/>
+                                <TextBlock Text="{Binding StyledAppCount}" Foreground="{ThemeResource SystemControlBackgroundBaseMediumBrush}"/>
                                 <TextBlock Text=" Applications" Foreground="{ThemeResource SystemControlBackgroundBaseMediumBrush}"/>
                             </StackPanel>
                         </StackPanel>
@@ -44,7 +45,7 @@
 
                 <StackPanel Margin="0,10,0,0">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                        <!-- PLACEHOLDER ICON -->
+                        
                         <v:ThemeIconView Width="328" Height="185" Background="black" />
 
                         <!-- Navigation Buttons -->
@@ -93,14 +94,14 @@
             </StackPanel>
 
             <!--- Saved Themes -->
-            <StackPanel Margin="0,50,0,0">
+            <StackPanel Margin="0,50,0,0" Visibility="{Binding IsSavedThemesVisible}">
                 <TextBlock Text="Saved Themes" FontSize="20" />
                 
                 <TextBlock Margin="0,10" Text="Select one of the saved themes to become the current theme or create a new theme."/>
 
                 <Button Content="New Theme" Width="120"/>
 
-                <GridView Margin="0,10,0,0"/>
+                <GridView Margin="0,10,0,0" ItemsSource="{Binding SavedThemes}"/>
             </StackPanel>
 
             <!--- Default Themes -->
@@ -109,7 +110,7 @@
 
                 <TextBlock Margin="0,10" Text="Select one of the two types of default themes to become the current theme."/>
 
-                <GridView Margin="0,10,0,0"/>
+                <GridView Margin="0,10,0,0" ItemsSource="{Binding DefaultThemes}"/>
             </StackPanel>
         </StackPanel>
     </ScrollViewer>
