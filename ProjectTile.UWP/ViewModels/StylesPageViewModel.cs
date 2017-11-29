@@ -352,6 +352,7 @@ namespace ProjectTile.UWP.ViewModels
             {
                 "#1867E6",
                 "#E05B8E",
+                "#326336",
                 "#8C7FEF"
             };
             this.SelectedRecentColor = this.RecentColors[0];

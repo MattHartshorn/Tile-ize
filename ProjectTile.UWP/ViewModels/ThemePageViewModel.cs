@@ -15,6 +15,7 @@ namespace ProjectTile.UWP.ViewModels
         private readonly MainPageViewModel _mainPageViewModel;
 
         private string _toggleAllAppsText;
+        private AppViewModel _selectedApp;
 
 
         public ThemePageViewModel()
@@ -115,8 +116,17 @@ namespace ProjectTile.UWP.ViewModels
 
         public AppViewModel SelectedApp
         {
-            get;
-            set;
+            get { return this._selectedApp; }
+            set
+            {
+                this._selectedApp = value;
+                RaisePropertyChanged(nameof(SelectedApp));
+
+                if (value != null)
+                {
+                    this._mainPageViewModel.SelectNavigationItem(NavigationPageKeys.Styles);
+                }
+            }
         }
 
         public RelayCommand ApplyCommand
@@ -164,13 +174,31 @@ namespace ProjectTile.UWP.ViewModels
         {
             this.ThemeName = "Test Theme";
             this.AppColors = new ObservableCollection<string>{
-                "#E61818",
                 "#1867E6",
+                "#326336",
             };
             this.RecentBackgroundImages = new ObservableCollection<string>
             {
-                "ms-appx:///Assets/bg1.png"
+                "ms-appx:///Assets/bg1.png",
+                "ms-appx:///Assets/bg2.png",
             };
+            this.StyledAppsSource = new ObservableCollection<AppViewModel>
+            {
+                new AppViewModel(1)
+                {
+                    BackgroundColor = "#1867E6",
+                    DisplayName = "Demo App",
+                    IconSource = "ms-appx:///Assets/Square44x44Logo.scale-100.png"
+                },
+                new AppViewModel(2)
+                {
+                    BackgroundColor = "#326336",
+                    DisplayName = "Notepad++",
+                    IconSource = "ms-appx:///Assets/notepad++.png"
+                }
+            };
+            this.IsResetStylesEnabled = true;
+            this.IsClearStylesEnabled = true;
         }
 
         private void OnToggleAllAppsCommandAction()
@@ -205,11 +233,16 @@ namespace ProjectTile.UWP.ViewModels
 
         private void OnResetStylesCommandAction()
         {
-
+            this.StyledAppsSource?.Clear();
+            this.IsResetStylesEnabled = false;
+            this.IsClearStylesEnabled = false;
         }
 
         private void OnClearStylesCommandAction()
         {
+            this.StyledAppsSource?.Clear();
+            this.IsResetStylesEnabled = false;
+            this.IsClearStylesEnabled = false;
         }
 
         private void OnMainPageViewModelPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)

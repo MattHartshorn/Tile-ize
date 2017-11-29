@@ -165,7 +165,7 @@
                              SelectedItem="{Binding SelectedApp, Mode=TwoWay}">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <Grid Padding="5">
+                                <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition/>
                                         <ColumnDefinition Width="*"/>
@@ -174,13 +174,15 @@
                                     <Grid Grid.Column="0" 
                                           Width="48" 
                                           Height="48"
+                                          Padding="10"
                                           Background="{Binding BackgroundColor, Converter={StaticResource SolidColorBrushConverter}}">
                                         <Image Source="{Binding IconSource}"/>
                                     </Grid>
 
                                     <TextBlock Grid.Column="1" 
                                                Margin="10,0,0,0" 
-                                               Text="{Binding DisplayName}"/>
+                                               Text="{Binding DisplayName}"
+                                               VerticalAlignment="Center"/>
                                 </Grid>
                             </DataTemplate>
                         </ListBox.ItemTemplate>

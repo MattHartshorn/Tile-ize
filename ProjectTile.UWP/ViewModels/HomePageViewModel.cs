@@ -42,16 +42,13 @@ namespace ProjectTile.UWP.ViewModels
             this.SaveCommand = new RelayCommand(OnSaveCommandAction);
 
             this._isSavedThemesVisible = Visibility.Collapsed;
-            this._savedThemesSource = new ObservableCollection<ThemeItemViewModel>
+            this._defaultThemesSource = new ObservableCollection<ThemeItemViewModel>
             {
                 new ThemeItemViewModel()
                 {
-                    ThemeName = "Test Theme",
-                    StyledAppCount = 2,
-                }
-            };
-            this._defaultThemesSource = new ObservableCollection<ThemeItemViewModel>
-            {
+                    ThemeName = "Default Theme",
+                    StyledAppCount = 0,
+                },
                 new ThemeItemViewModel()
                 {
                     ThemeName = "Empty Theme",
@@ -218,15 +215,10 @@ namespace ProjectTile.UWP.ViewModels
                     ThemeName = "Test Theme",
                     StyledAppCount = 2,
                     AppColorHexItems = new ObservableCollection<string>{
-                        "#E61818",
                         "#1867E6",
+                        "#326336",
                     },
                     ImageSourceUri = "ms-appx:///Assets/bg1.png"
-                },
-                new ThemeItemViewModel()
-                {
-                    ThemeName = "My Empty Saved Theme",
-                    StyledAppCount = 0,
                 }
             };
         }

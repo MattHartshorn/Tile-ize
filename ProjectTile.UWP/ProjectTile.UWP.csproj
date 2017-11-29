@@ -138,10 +138,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\bg1.png" />
+    <Content Include="Assets\bg2.png" />
     <Content Include="Assets\DefaultThemeBackground.png" />
     <Content Include="Assets\LargeTile.scale-100.png" />
     <Content Include="Assets\LargeTile.scale-200.png" />
     <Content Include="Assets\LargeTile.scale-400.png" />
+    <Content Include="Assets\notepad++.png" />
     <Content Include="Assets\SmallTile.scale-100.png" />
     <Content Include="Assets\SmallTile.scale-200.png" />
     <Content Include="Assets\SmallTile.scale-400.png" />
