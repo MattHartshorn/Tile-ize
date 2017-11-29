@@ -27,7 +27,7 @@ namespace ProjectTile.UWP.Views
             "ThemeBackgroundSource", 
             typeof(ImageSource), 
             typeof(ThemeIconView), 
-            new PropertyMetadata(new Uri("ms-appx:///Assets/DefaultThemeBackground.png", UriKind.Absolute)));
+            new PropertyMetadata("ms-appx:///Assets/DefaultThemeBackground.png"));
 
         public static readonly DependencyProperty AppColorItemSourceProperty = DependencyProperty.Register(
             "AppColorItemSource",
@@ -56,7 +56,7 @@ namespace ProjectTile.UWP.Views
             {
                 if (value == null)
                 {
-                    SetValue(ThemeBackgroundSourceProperty, new Uri("ms-appx:///Assets/DefaultThemeBackground.png", UriKind.Absolute));
+                    SetValue(ThemeBackgroundSourceProperty, "ms-appx:///Assets/DefaultThemeBackground.png");
                 }
                 else
                 {

@@ -98,11 +98,15 @@
     <Compile Include="NavigationPageKeys.cs" />
     <Compile Include="Services\INavigationService.cs" />
     <Compile Include="Services\NavigationService.cs" />
+    <Compile Include="Util\BooleanToVisibilityConverter.cs" />
     <Compile Include="Util\SolidColorBrushConverter.cs" />
+    <Compile Include="ViewModels\AppViewModel.cs" />
     <Compile Include="ViewModels\HomePageViewModel.cs" />
     <Compile Include="ViewModels\NavigationItemViewModel.cs" />
+    <Compile Include="ViewModels\StylesPageViewModel.cs" />
     <Compile Include="ViewModels\ThemeIconAppViewModel.cs" />
     <Compile Include="ViewModels\ThemeItemViewModel.cs" />
+    <Compile Include="ViewModels\ThemePageViewModel.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="Views\Pages\StylesPageView.xaml.cs">
@@ -133,6 +137,7 @@
     <None Include="ProjectTile.UWP_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\bg1.png" />
     <Content Include="Assets\DefaultThemeBackground.png" />
     <Content Include="Assets\LargeTile.scale-100.png" />
     <Content Include="Assets\LargeTile.scale-200.png" />

@@ -11,6 +11,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="./Themes/General.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+            
 
             <vm:ViewModelLocator x:Key="ViewModelLocator" />
 

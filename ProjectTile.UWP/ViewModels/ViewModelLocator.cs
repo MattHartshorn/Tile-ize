@@ -39,6 +39,8 @@ namespace ProjectTile.UWP.ViewModels
             SimpleIoc.Default.Register<INavigationService>(() => nav);
             SimpleIoc.Default.Register<MainPageViewModel>();
             SimpleIoc.Default.Register<HomePageViewModel>();
+            SimpleIoc.Default.Register<ThemePageViewModel>();
+            SimpleIoc.Default.Register<StylesPageViewModel>();
         }
 
         public MainPageViewModel MainPage
@@ -49,6 +51,16 @@ namespace ProjectTile.UWP.ViewModels
         public HomePageViewModel HomePage
         {
             get { return ServiceLocator.Current.GetInstance<HomePageViewModel>(); }
+        }
+
+        public ThemePageViewModel ThemePage
+        {
+            get { return ServiceLocator.Current.GetInstance<ThemePageViewModel>(); }
+        }
+
+        public StylesPageViewModel StylesPage
+        {
+            get { return ServiceLocator.Current.GetInstance<StylesPageViewModel>(); }
         }
     }
 }

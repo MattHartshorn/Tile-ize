@@ -42,7 +42,6 @@ namespace ProjectTile.UWP.ViewModels
 
             this.ToggleAllAppsBtnText = "Show All Apps";
             this._navigationService = ServiceLocator.Current.GetInstance<INavigationService>();
-            this.AllAppsToggleCommand = new RelayCommand(OnAllAppsToggleCommandAction, () => this.IsAllAppsPanelEnabled);
             this.SaveCommand = new RelayCommand(OnSaveCommandAction, () => this.IsSaveRequired);
         }
         #endregion
@@ -96,6 +95,8 @@ namespace ProjectTile.UWP.ViewModels
             set
             {
                 this._isAllAppsPanelOpen = value;
+                this.ToggleAllAppsBtnText = (value) ? "Hide All Apps" : "Show All Apps";
+
                 RaisePropertyChanged(nameof(IsAllAppsPanelOpen));
             }
         }
@@ -118,11 +119,6 @@ namespace ProjectTile.UWP.ViewModels
                 this._isSaveRequired = value;
                 RaisePropertyChanged(nameof(IsSaveRequired));
             }
-        }
-
-        public RelayCommand AllAppsToggleCommand
-        {
-            get;
         }
 
         public RelayCommand SaveCommand
@@ -184,12 +180,6 @@ namespace ProjectTile.UWP.ViewModels
 
                 this._navigationService.NavigateTo(pageKey);
             }
-        }
-
-        private void OnAllAppsToggleCommandAction()
-        {
-            this.IsAllAppsPanelOpen = !this.IsAllAppsPanelOpen;
-            this.ToggleAllAppsBtnText = (this.IsAllAppsPanelOpen) ? "Hide All Apps" : "Show All Apps";
         }
 
         private void OnSaveCommandAction()

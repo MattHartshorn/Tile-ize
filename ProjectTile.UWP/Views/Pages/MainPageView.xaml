@@ -69,7 +69,7 @@
                         <AppBarToggleButton IsEnabled="{Binding MainPage.IsAllAppsPanelEnabled, Source={StaticResource ViewModelLocator}}"
                                             Label="{Binding MainPage.ToggleAllAppsBtnText, Source={StaticResource ViewModelLocator}}"
                                             Style="{ThemeResource AppBarToggleButtonRevealLabelsOnRightStyle}"
-                                            Command="{Binding MainPage.AllAppsToggleCommand, Source={StaticResource ViewModelLocator}}">
+                                            IsChecked="{Binding MainPage.IsAllAppsPanelOpen, Source={StaticResource ViewModelLocator}, Mode=TwoWay}">
                             <AppBarToggleButton.Icon>
                                 <FontIcon Glyph="&#xE71D;"/>
                             </AppBarToggleButton.Icon>

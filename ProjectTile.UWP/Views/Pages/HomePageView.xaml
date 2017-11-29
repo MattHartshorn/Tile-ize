@@ -39,14 +39,15 @@
             <!-- Current Theme -->
             <StackPanel Margin="0,10,0,0">
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Current Theme: " FontSize="20" />
-                    <TextBlock Text="{Binding CurrentThemeName}" FontSize="20" />
+                    <TextBlock Text="Current Theme:" FontSize="20" />
+                    <TextBlock Margin="10,0,0,0" Text="{Binding CurrentThemeName}" FontSize="20" />
                 </StackPanel>
 
                 <StackPanel Margin="0,10,0,0">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                         
-                        <v:ThemeIconView Width="328" Height="185" Background="black" />
+                        <v:ThemeIconView ThemeBackgroundSource="{Binding CurrentThemeBackgroundSource}"
+                                         AppColorItemSource="{Binding CurrentThemeAppColors}"/>
 
                         <!-- Navigation Buttons -->
                         <StackPanel Margin="15,0,0,0">
@@ -86,9 +87,20 @@
                     </StackPanel>
 
                     <StackPanel Margin="0,15,0,0" Orientation="Horizontal">
-                        <Button Content="Apply Theme" MinWidth="120" Margin="0,0,15,0"/>
-                        <Button Content="Save" MinWidth="120" Margin="0,0,15,0"/>
-                        <Button Content="Save As..." MinWidth="120" />
+                        <Button Content="Apply Theme" 
+                                MinWidth="120" 
+                                Margin="0,0,15,0"
+                                Command="{Binding ApplyCommand}"/>
+                        
+                        <Button Content="Save" 
+                                MinWidth="120" 
+                                Margin="0,0,15,0"
+                                IsEnabled="{Binding IsSaveEnabled}"
+                                Command="{Binding SaveCommand}"/>
+                        
+                        <Button Content="Save As..." 
+                                MinWidth="120"
+                                Command="{Binding SaveAsCommand}"/>
                     </StackPanel>
                 </StackPanel>
             </StackPanel>
@@ -101,7 +113,9 @@
 
                 <Button Content="New Theme" Width="120"/>
 
-                <GridView Margin="0,10,0,0" ItemsSource="{Binding SavedThemes}"/>
+                <GridView Margin="0,10,0,0" 
+                          ItemsSource="{Binding SavedThemesSource}" 
+                          SelectedItem="{Binding SelectedSavedTheme, Mode=TwoWay}"/>
             </StackPanel>
 
             <!--- Default Themes -->
@@ -110,7 +124,9 @@
 
                 <TextBlock Margin="0,10" Text="Select one of the two types of default themes to become the current theme."/>
 
-                <GridView Margin="0,10,0,0" ItemsSource="{Binding DefaultThemes}"/>
+                <GridView Margin="0,10,0,0"
+                          ItemsSource="{Binding DefaultThemesSource}"
+                          SelectedItem="{Binding SelectedDefaultTheme, Mode=TwoWay}"/>
             </StackPanel>
         </StackPanel>
     </ScrollViewer>
