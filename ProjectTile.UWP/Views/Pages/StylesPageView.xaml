@@ -1,0 +1,211 @@
+﻿<Page
+    x:Class="ProjectTile.UWP.Views.Pages.StylesPageView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ProjectTile.UWP.Views.Pages"
+    xmlns:u="using:ProjectTile.UWP.Util"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    DataContext="{Binding StylesPage, Source={StaticResource ViewModelLocator}}">
+    <Page.Resources>
+        <u:SolidColorBrushConverter x:Key="SolidColorBrushConverter"/>
+        <u:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </Page.Resources>
+    
+    <ScrollViewer>
+        <StackPanel Margin="0,10,0,0">
+            <!-- Tile Preview, Display Name, Icons -->
+            <RelativePanel Margin="0,10,0,0">
+                <StackPanel x:Name="TilePreviewPanel" Margin="0,0,10,0">
+                    <StackPanel Orientation="Horizontal">
+                        <Grid Background="{Binding SelectedColor, Converter={StaticResource SolidColorBrushConverter}}" 
+                              Height="150" 
+                              Width="150"
+                              Padding="10"
+                              VerticalAlignment="Bottom">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+                                <Image Height="90" Width="90" Source="{Binding LargeIconSource}"/>
+                                <TextBlock Grid.Row="1" 
+                                           Text="{Binding DisplayName}" 
+                                           HorizontalAlignment="Center" 
+                                           Foreground="{Binding TileFontColor, Converter={StaticResource SolidColorBrushConverter}}"
+                                           Visibility="{Binding IsLargeTileTextVisible, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                        </Grid>
+
+                        <Grid Margin="10,0"
+                              Background="{Binding SelectedColor, Converter={StaticResource SolidColorBrushConverter}}" 
+                              Height="70" 
+                              Width="70"
+                              VerticalAlignment="Bottom">
+                            <Image Height="48" Width="48" Source="{Binding MediumIconSource}"/>
+                        </Grid>
+
+                        <Grid Background="{Binding SelectedColor, Converter={StaticResource SolidColorBrushConverter}}" 
+                              Height="44" 
+                              Width="44"
+                              VerticalAlignment="Bottom">
+                            <Image Height="32" Width="32" Source="{Binding SmallIconSource}"/>
+                        </Grid>
+                    </StackPanel>
+
+                    <!-- Reset Icons -->
+                    <StackPanel Margin="0,5,0,0" Orientation="Horizontal">
+                        <TextBlock Text="Reset Icon:" VerticalAlignment="Center"/>
+
+                        <HyperlinkButton Margin="10,0,0,0" 
+                                         IsEnabled="{Binding IsLargeIconResetEnabled}"
+                                         Command="{Binding ResetIconCommand}" 
+                                         CommandParameter="Large">
+                            <TextBlock Text="Large"/>
+                        </HyperlinkButton>
+
+                        <HyperlinkButton Margin="15,0,0,0"
+                                         IsEnabled="{Binding IsMediumIconResetEnabled}"
+                                         Command="{Binding ResetIconCommand}" 
+                                         CommandParameter="Meduim">
+                            <TextBlock Text="Medium"/>
+                        </HyperlinkButton>
+
+                        <HyperlinkButton Margin="15,0,0,0"
+                                         IsEnabled="{Binding IsSmallIconResetEnabled}"
+                                         Command="{Binding ResetIconCommand}" 
+                                         CommandParameter="Small">
+                            <TextBlock Text="Small"/>
+                        </HyperlinkButton>
+                    </StackPanel>
+                </StackPanel>
+                
+                <!-- App Name, Details, & Display Name -->
+                <StackPanel RelativePanel.RightOf="TilePreviewPanel">
+                    <TextBlock Text="Application"/>
+                    <TextBlock Margin="0,5,0,0" Text="{Binding AppName}"/>
+                    
+                    <HyperlinkButton Command="{Binding ToggleDetailsCommand}">
+                        <TextBlock Text="{Binding ToggleDetailsText}"/>
+                    </HyperlinkButton>
+
+                    <TextBlock Margin="0,10,0,0" Text="Display Name"/>
+                    <TextBox Margin="0,5,0,0"
+                             Text="{Binding DisplayName, Mode=TwoWay}" 
+                             Width="400"/>
+                </StackPanel>
+
+                <!-- Application Details -->
+                <StackPanel Margin="0,10,0,0"  
+                            RelativePanel.Below="TilePreviewPanel"
+                            Visibility="{Binding IsAppDetailsVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <TextBlock FontSize="20" Text="Application Details"/>
+                    
+                    <TextBlock Margin="0,15,0,0" Text="Shortcut Location"/>
+                    <TextBox Margin="0,5,0,0"
+                             HorizontalAlignment="Left"
+                             Text="{Binding ShortcutPath}"
+                             Width="500"
+                             IsReadOnly="True"/>
+                    
+                    <TextBlock Margin="0,10,0,0" Text="Executable Location"/>
+                    <TextBox Margin="0,5,0,0"
+                             HorizontalAlignment="Left"
+                             Text="{Binding ExecutablePath}"
+                             Width="500"
+                             IsReadOnly="True"/>
+                </StackPanel>
+            </RelativePanel>
+
+            <!-- Colors -->
+            <StackPanel Margin="0,25,0,0" HorizontalAlignment="Left">
+                <TextBlock Text="Choose your background color" FontSize="20"/>
+
+                <!-- Recent Colors -->
+                <StackPanel Margin="0,10,0,0">
+                    
+                    <!-- Recent Colors -->
+                    <TextBlock Text="Recent Colors" FontSize="18"/>
+
+                    <GridView Margin="0,10,0,0" ItemsSource="{Binding RecentColors}"
+                              SelectedItem="{Binding SelectedRecentColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                        <GridView.ItemTemplate>
+                            <DataTemplate>
+                                <Rectangle Fill="{Binding Converter={StaticResource SolidColorBrushConverter}}" 
+                                           Height="50" 
+                                           Width="50"/>
+                            </DataTemplate>
+                        </GridView.ItemTemplate>
+                    </GridView>
+                </StackPanel>
+
+                <!-- Windows Colors -->
+                <StackPanel Margin="0,10,0,0">
+                    <TextBlock FontSize="18"
+                               Text="Windows Colors" />
+
+                    <GridView Margin="0,10,0,0" 
+                              ItemsSource="{Binding WindowsColors}"
+                              SelectedItem="{Binding SelectedWindowsColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                        <GridView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <ItemsWrapGrid MaximumRowsOrColumns="8" Orientation="Horizontal" />
+                            </ItemsPanelTemplate>
+                        </GridView.ItemsPanel>
+                        <GridView.ItemTemplate>
+                            <DataTemplate>
+                                <Rectangle Fill="{Binding Converter={StaticResource SolidColorBrushConverter}}" 
+                                           Height="50" 
+                                           Width="50"/>
+                            </DataTemplate>
+                        </GridView.ItemTemplate>
+                    </GridView>
+                </StackPanel>
+
+                <!-- Custom Color -->
+                <Button HorizontalAlignment="Stretch" 
+                        Height="48" 
+                        HorizontalContentAlignment="Left"
+                        Background="Transparent"
+                        Command="{Binding CustomColorCommand}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Border Height="35"
+                                    Width="35" 
+                                    HorizontalAlignment="Left"
+                                    Background="{ThemeResource SystemControlBackgroundBaseLowBrush}">
+                            <FontIcon Glyph="&#xE710;"/>
+                        </Border>
+
+                        <TextBlock Margin="10,0,0,0" 
+                                   Grid.Column="1" 
+                                   VerticalAlignment="Center"
+                                   Text="Custom Color"/>
+                    </Grid>
+                </Button>
+            </StackPanel>
+
+            <!-- Font -->
+            <StackPanel Margin="0,25,0,0" >
+                <TextBlock Text="Change your text settings" FontSize="20"/>
+
+                <!-- Font Theme -->
+                <StackPanel Margin="0,10,0,0">
+                    <TextBlock Text="Font Theme" FontSize="18"/>
+
+                    <RadioButton Content="Light" IsChecked="{Binding IsFontLight, Mode=TwoWay}"/>
+                    <RadioButton Content="Dark" IsChecked="{Binding IsFontDark, Mode=TwoWay}"/>
+                </StackPanel>
+
+                <StackPanel Margin="0,20,0,0">
+                    <TextBlock Text="Display text on large tile" FontSize="18"/>
+
+                    <ToggleSwitch IsOn="{Binding IsLargeTileTextVisible, Mode=TwoWay}"/>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

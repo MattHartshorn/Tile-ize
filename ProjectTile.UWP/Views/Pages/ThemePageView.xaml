@@ -1,0 +1,191 @@
+﻿<Page
+    x:Class="ProjectTile.UWP.Views.Pages.ThemePageView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ProjectTile.UWP.Views.Pages"
+    xmlns:u="using:ProjectTile.UWP.Util"
+    xmlns:v="using:ProjectTile.UWP.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    DataContext="{Binding ThemePage, Source={StaticResource ViewModelLocator}}">
+    <Page.Resources>
+        <u:SolidColorBrushConverter x:Key="SolidColorBrushConverter"/>
+    </Page.Resources>
+    
+    <ScrollViewer>
+        <StackPanel>
+        <!-- Header -->
+        <StackPanel Margin="0,20,0,0">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+
+                <v:ThemeIconView ThemeBackgroundSource="{Binding BackgroundImageSource}"
+                                 AppColorItemSource="{Binding AppColors}"/>
+
+                <StackPanel Margin="15,0,0,0">
+                    <StackPanel.Resources>
+                        <Style TargetType="Button" BasedOn="{StaticResource ImageRevealButton}">
+                            <Setter Property="Margin" Value="0,5,0,0"/>
+                        </Style>
+                    </StackPanel.Resources>
+                    
+                    <TextBox Text="{Binding ThemeName, Mode=TwoWay}" 
+                             FontSize="18" 
+                             Width="400"/>
+
+                    <StackPanel Margin="0,5,0,0" Orientation="Horizontal">
+                        <StackPanel>
+                            <Button Command="{Binding ApplyCommand}">
+                                <StackPanel Orientation="Horizontal">
+                                    <FontIcon Glyph="&#xE73E;"/>
+                                    <TextBlock Margin="10,0" Text="Apply Theme"/>
+                                </StackPanel>
+                            </Button>
+
+                            <Button Command="{Binding SaveCommand}"
+                                    IsEnabled="{Binding IsSaveEnabled}">
+                                <StackPanel Orientation="Horizontal">
+                                    <FontIcon Glyph="&#xE74E;"/>
+                                    <TextBlock Margin="10,0" Text="Save"/>
+                                </StackPanel>
+                            </Button>
+
+                            <Button Command="{Binding SaveAsCommand}">
+                                <StackPanel Orientation="Horizontal">
+                                    <FontIcon Glyph="&#xE792;"/>
+                                    <TextBlock Margin="10,0" Text="Save As..."/>
+                                </StackPanel>
+                            </Button>
+                        </StackPanel>
+
+                        <Button VerticalAlignment="Top" 
+                                Margin="20,5,0,0"
+                                Command="{Binding DeleteCommand}"
+                                IsEnabled="{Binding IsDeleteEnabled}">
+                            <StackPanel Orientation="Horizontal">
+                                <FontIcon Glyph="&#xE74D;"/>
+                                <TextBlock Margin="10,0" Text="Delete Theme"/>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+
+        <!-- Content -->
+        <StackPanel Margin="0,50,0,0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                
+                <!-- Background -->
+                <StackPanel Grid.Row="0">
+                    <TextBlock Text="Choose Theme Image" FontSize="20"/>
+
+                    <GridView Margin="0,10,0,0"
+                              ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                              ScrollViewer.VerticalScrollMode="Disabled"
+                              ItemsSource="{Binding RecentBackgroundImages}"
+                              SelectedItem="{Binding SelectedRecentBackgroundImage, Mode=TwoWay}">
+                        <GridView.ItemContainerStyle>
+                            <Style TargetType="GridViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                            </Style>
+                        </GridView.ItemContainerStyle>
+                        <GridView.ItemTemplate>
+                            <DataTemplate>
+                                <Image Height="60" Width="60" Source="{Binding}" Stretch="Fill"/>
+                            </DataTemplate>
+                        </GridView.ItemTemplate>
+                    </GridView>
+
+                    <Button Content="Browse" MinWidth="120" Command="{Binding BrowseCommand}"/>
+                </StackPanel>
+
+                <Grid Grid.Row="1" Margin="0,50,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    
+                    <StackPanel>
+                        <TextBlock Text="Application Styles" FontSize="20"/>
+
+                        <HyperlinkButton Margin="0,10,0,0" Command="{Binding ToggleAllAppsCommand}">
+                            <TextBlock Text="{Binding ToggleAllAppsText}"/>
+                        </HyperlinkButton>
+
+                        <TextBlock Margin="0,10,0,15"
+                               HorizontalAlignment="Left"
+                               TextWrapping="Wrap"
+                               Width="500"
+                               Text="Search, add, remove, and modify the styles for installed application tiles. These styles are displayed primarily on the Windows Start Menu."/>
+
+                        <AutoSuggestBox Margin="0,0,0,10"
+                                    HorizontalAlignment="Left" 
+                                    Width="300" 
+                                    PlaceholderText="Search App Styles" 
+                                    QueryIcon="Find" Text="{Binding AppsQueryText, Mode=TwoWay}"/>
+
+                        <StackPanel Orientation="Horizontal">
+                            <Button Style="{StaticResource ImageRevealButton}" 
+                                    Command="{Binding ResetStylesCommand}"
+                                    IsEnabled="{Binding IsResetStylesEnabled}">
+                                <StackPanel Orientation="Horizontal">
+                                    <FontIcon Glyph="&#xE8EE;"/>
+                                    <TextBlock Margin="10,0" Text="Reset All Styles"/>
+                                </StackPanel>
+                            </Button>
+
+                            <Button Margin="10,0,0,0" 
+                                    Style="{StaticResource ImageRevealButton}"
+                                    Command="{Binding ClearStylesCommand}"
+                                    IsEnabled="{Binding IsClearStylesEnabled}">
+                                <StackPanel Orientation="Horizontal">
+                                    <FontIcon Glyph="&#xE894;"/>
+                                    <TextBlock Margin="10,0" Text="Clear All Styles"/>
+                                </StackPanel>
+                            </Button>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <ListBox Grid.Row="1" 
+                             Margin="0,10,0,0" 
+                             HorizontalAlignment="Left" 
+                             MaxWidth="600"
+                             Background="Transparent"
+                             ItemsSource="{Binding StyledAppsSource}"
+                             SelectedItem="{Binding SelectedApp, Mode=TwoWay}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Grid Grid.Column="0" 
+                                          Width="48" 
+                                          Height="48"
+                                          Padding="10"
+                                          Background="{Binding BackgroundColor, Converter={StaticResource SolidColorBrushConverter}}">
+                                        <Image Source="{Binding IconSource}"/>
+                                    </Grid>
+
+                                    <TextBlock Grid.Column="1" 
+                                               Margin="10,0,0,0" 
+                                               Text="{Binding DisplayName}"
+                                               VerticalAlignment="Center"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Grid>
+            </Grid>
+        </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
+</Page>
