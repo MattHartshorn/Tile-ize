@@ -13,12 +13,8 @@
         <u:SolidColorBrushConverter x:Key="SolidColorBrushConverter"/>
     </Page.Resources>
     
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        
+    <ScrollViewer>
+        <StackPanel>
         <!-- Header -->
         <StackPanel Margin="0,20,0,0">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
@@ -77,7 +73,7 @@
         </StackPanel>
 
         <!-- Content -->
-        <ScrollViewer Grid.Row="1" Margin="0,50,0,0">
+        <StackPanel Margin="0,50,0,0">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -189,6 +185,7 @@
                     </ListBox>
                 </Grid>
             </Grid>
-        </ScrollViewer>
-    </Grid>
+        </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
 </Page>
